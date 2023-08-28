@@ -308,7 +308,7 @@ Status Code: 200
 |features|object|ユーザーが利用できる機能。これらは文字列またはブーリアン値で識別される|
 |href|string|このエンドポイントに関連するリンク|
 
-```
+```json
 {
   "id": "1",
   "username": "username",
@@ -424,7 +424,7 @@ Status Code: 200
 |links|object|このエンドポイントのリンクを含む|
 |self|string|このエンドポイントに関連するリンク|
 
-```
+```json
 {
   "data": [
     {
@@ -473,23 +473,368 @@ Status Code: 200
 #### GET /users/{user_id}/shared
 `GET /users/{user_id}/shared`
 
+##### 利用可能なメソッド
+- `HEAD`: リソースが利用可能かをチェックする
+- `OPTIONS`: 利用可能なメソッドとオプションを返す
+- `GET`: 全てのワークグループでユーザーと共有されているリソースを返す。公開アプリのユーザーは、**View Workgroup Shares**スコープにアクセスする必要があります：
+
+##### GETのオプションクエリ
+|Name|Type|Required|Description|
+|-|-|-|-|
+|per_page|string|false|ページごとに返すリソースの数。デフォルトは50|
+|page|string|false|リソースのどのページを返すか。デフォルトは1|
+|resource_type|string|false|共有リソースのタイプ|
+|resource_id|string|false|共有リソースのカンマ区切りID (resource_typeと併用する必要がある)|
+|include|string|false|各リソースについて返す追加フィールドを指定する。`permissions`, `resource_details`のいずれか。`permissions`は各ワークグループのコレクターと調査アクションの権限を示し、`resource_details`は各共有リソースの詳細情報を示す。|
+
+##### Responseスキーマ
+Status Code: 200
+
+|Name|Type|Description|
+|-|-|-|
+|data|[object]|共有リソースとその情報を含む|
+|share_id|string|シェアレコードのID|
+|workgroup_id|string|共有されたワークグループのID|
+|resource_type|string|共有リソースのタイプ(調査など)|
+|resource_id|string|共有リソースのID(SurveyIDなど)|
+|privileges|[string]|この共有レコードによってユーザーに付与されたスコープ付き特権の配列|
+|per_page|integer|ページごとに返されるリソースの数|
+|page|integer|返されたリソースのページ|
+|total|integer|返却された共有リソースの数|
+|links|object|このエンドポイントのリンクを含む|
+|self|string|このエンドポイントに関連付けられたリンク|
+
+```json
+{
+  "data": [
+    {
+      "share_id": "0ca749c2893245c5b96a128eee4c2d42",
+      "workgroup_id": "71d9d408d1914c9ca85ffcda8330d675",
+      "resource_type": "survey",
+      "resource_id": "101101101",
+      "privileges": [
+        "design.read_only",
+        "collect.read_only",
+        "analyze.read_only"
+      ]
+    }
+  ],
+  "per_page": 50,
+  "page": 1,
+  "total": 1,
+  "links": {
+    "self": "https://api.surveymonkey.com/v3/users/61003234/shared?page=1&per_page=50"
+  }
+}
+```
+
 #### GET /groups
 `GET /groups`
+
+##### 利用可能なメソッド
+- `HEAD`: リソースが利用可能かをチェックする
+- `OPTIONS`: 利用可能なメソッドとオプションを返す
+- `GET`: ユーザアカウントがチームに所属している場合、チームを返す (ユーザは1つのチームにしか所属できない)。公開アプリのユーザーは、**View Teams**スコープにアクセスする必要があります：
+
+##### GETのオプションクエリ
+|Name|Type|Required|Description|
+|-|-|-|-|
+|per_page|string|false|ページごとに返すリソースの数|
+|page|string|false|リソースのどのページを返すか。デフォルトは1|
+
+##### Responseスキーマ
+Status Code: 200
+
+|Name|Type|Description|
+|-|-|-|
+|per_page|integer||
+|total|integer||
+|data|[object]||
+|name|string|グループ名|
+|id|string|グループID|
+|href|string|リソースAPIのURL|
+|links|object||
+|self|string||
+|page|integer||
+
+```json
+{
+  "data": [
+    {
+      "id": "1",
+      "name": "group name",
+      "href": "https://api.surveymonkey.com/v3/groups/1"
+    }
+  ],
+  "per_page": 50,
+  "page": 1,
+  "total": 1,
+  "links": {
+    "self": "https://api.surveymonkey.com/v3/groups?page=1&per_page=50"
+  }
+}
+```
 
 #### GET /groups/{id}
 `GET /groups/{id}`
 
+##### 利用可能なメソッド
+- `HEAD`: リソースが利用可能かをチェックする
+- `OPTIONS`: 利用可能なメソッドとオプションを返す
+- `GET`: チームのオーナーやメールアドレスなど、チームの詳細を返す。公開アプリのユーザーは、**View Teams**スコープにアクセスする必要があります：
+
+##### Responseスキーマ
+Status Code: 200
+
+|Name|Type|Description|
+|-|-|-|
+|max_invites|integer|グループに入れるメンバーの最大数|
+|date_created|string|グループが作成された日時|
+|name|string|グループ名|
+|id|string|グループID|
+|href|string||
+|member_count|integer|グループのメンバー数|
+
+```json
+{
+  "id": "1",
+  "name": "group name",
+  "member_count": 5,
+  "max_invites": 0,
+  "date_created": "2018-08-08T21:58:32+00:00",
+  "href": "https://api.surveymonkey.com/v3/groups/1"
+}
+```
+
 #### GET /groups/{id}/activities
 `GET /groups/{id}/activities`
+
+##### 利用可能なメソッド
+- `GET`: 指定されたグループのActivity関連データのリストを返す。公開アプリのユーザーは、adminである必要があります：
+
+##### GETのオプションクエリ
+|Name|Type|Required|Description|
+|-|-|-|-|
+|limit|integer|false|返される行の最大数。デフォルトは50|
+|offset|integer|false|結果のオフセット、つまりスキップする行数|
+|start_date|Date|false|Activity関連データクエリの開始日|
+|end_date|Date|false|Activity関連データクエリの終了日|
+
+##### Responseスキーマ
+Status Code: 200
+
+|Name|Type|Description|
+|-|-|-|
+|sl_translate|string||
+|total|integer||
+|offset|integer||
+|limit|integer||
+|results|[object]||
+|member_type|string|Activityのメンバータイプ|
+|country|string||
+|user_id|integer|Activityに記録されたユーザーID|
+|group_id|integer|Activityに記録されたグループID|
+|city|string||
+|date_created|Date|Activityの作成日|
+|user_name|string|Activityに記録されたユーザー名|
+|activity_type|string|Activityの種類|
+|division_name|any||
+|activity_msg|string|Activityへのメッセージ|
+|ip_address|string|ActivityのIPアドレスのログ|
+|email|string|Activityに記録されたメールアドレス|
+
+```json
+{
+  "sl_translate": "activity_msg,member_type",
+  "total": 1,
+  "offset": 0,
+  "limit": 1,
+  "results": [
+    {
+      "date_created": "2021-07-16 16:07:14",
+      "user_id": 1,
+      "user_name": "username",
+      "email": "email@surveymonkey.com",
+      "member_type": "<span>(Primary Admin)</span>",
+      "group_id": 1,
+      "activity_type": "survey_info_delete",
+      "activity_msg": "<span>Deleted survey <span class=\"notranslate\"><b>put req name change</b></span></span>",
+      "ip_address": "11.11.11.111",
+      "city": "Theed",
+      "country": "Naboo",
+      "division_name": null
+    }
+  ]
+}
+```
 
 #### GET /groups/{id}/activities/{activity_type}
 `GET /groups/{id}/activities/{activity_type}`
 
+##### 利用可能なメソッド
+- `GET`: Activity列挙型の値が指定された場合、指定されたグループのインターバルごとの特定のActivityのカウントを返す。公開アプリのユーザーは、adminである必要があります：
+
+##### ActivityタイプのEnum
+- authentication_succeeded
+- authentication_failed
+- authentication_signout
+- group_info_updated_group_name
+- invite_created
+- invite_resent
+- member_deleted
+- member_joined
+- survey_info_create
+- survey_info_delete
+- survey_info_copy
+- survey_info_update
+- survey_info_transfer
+- collector_info_created
+- collector_info_deleted
+- collector_info_updated
+- member_updated_group_member_type
+- permission_created
+- permission_updated
+- shared_view_created
+- shared_view_updated
+- export_export_create
+- export_downloaded
+- respondent_updated
+- respondent_deleted
+- grant_info_created
+- grant_info_deleted
+
+##### GETのオプションクエリ
+|Name|Type|Required|Description|
+|-|-|-|-|
+|interval|string-ENUM|true|一連のデータを返すインターバル("daily","weekly","monthly","yearly"のいずれか)|
+|start_date|Date|false|アクティビティ関連データクエリの開始日|
+|end_date|Date|false|アクティビティ関連データクエリの終了日|
+
+##### Responseスキーマ
+Status Code: 200
+
+|Name|Type|Description|
+|-|-|-|
+|series|array|指定したActivityタイプのインターバルごとのカウントの一連のデータ|
+|times|array|一連のデータセットのタイムラベル|
+|interval|string|返された一連のデータのインターバル|
+
+```json
+{
+  "series": [
+    86,
+    193
+  ],
+  "times": [
+    "2020",
+    "2019"
+  ],
+  "interval": "yearly"
+}
+```
+
 #### GET /groups/{group_id}/members
 `GET /groups/{group_id}/members`
 
+##### 利用可能なメソッド
+- `HEAD`: リソースが利用可能かをチェックする
+- `OPTIONS`: 利用可能なメソッドとオプションを返す
+- `GET`: 指定したグループのメンバーとして追加されたユーザーのリストを返す。公開アプリのユーザーは、**View Teams**スコープにアクセスする必要があります：
+
+##### GETのオプションクエリ
+|Name|Type|Required|Description|
+|-|-|-|-|
+|per_page|integer|false|ページごとに返すリソースの数。デフォルトは50|
+|page|integer|false|リソースのどのページを返すか。デフォルトは1|
+|division_ids|string|false|メンバーIDのオプションリスト|
+|include|string|false|プロパティを含めるかどうか オプションは[`first_name`, `last_name`, `user_id`, `email`, `type`, `language`, `status`]|
+
+##### 詳細説明
+**include**: プロパティを含めるかどうか。オプションは first_name、last_name、user_id、email、type、language、status
+
+##### Responseスキーマ
+Status Code: 200
+
+|Name|Type|Description|
+|-|-|-|
+|per_page|integer||
+|total|integer||
+|data|[object]||
+|id|string|メンバーId|
+|href|string|リソースAPIのURL|
+|username|string|メンバーのユーザー名|
+|links|object||
+|self|string||
+|page|integer||
+
+```json
+{
+  "data": [
+    {
+      "id": "1",
+      "username": "user1",
+      "href": "https://api.surveymonkey.com/v3/groups/1/members/1"
+    },
+    {
+      "id": "2",
+      "username": "user2",
+      "href": "https://api.surveymonkey.com/v3/groups/1/members/2"
+    }
+  ],
+  "per_page": 50,
+  "page": 1,
+  "total": 2,
+  "links": {
+    "self": "https://api.surveymonkey.com/v3/groups/1/members?page=1&per_page=50"
+  }
+}
+```
+
 #### GET /groups/{group_id}/members/{member_id}
 `GET /groups/{group_id}/members/{member_id}`
+
+##### 利用可能なメソッド
+- `HEAD`: リソースが利用可能かをチェックする
+- `OPTIONS`: 利用可能なメソッドとオプションを返す
+- `GET`: グループメンバーの`role`や`status`などの詳細を返す。公開アプリのユーザーは、**View Teams**スコープにアクセスする必要があります：
+
+##### Responseスキーマ
+Status Code: 200
+
+|Name|Type|Description|
+|-|-|-|
+|user_id|string|グループメンバーのユーザーID|
+|date_created|string|メンバーが作成された日時|
+|last_name|string||
+|language|string||
+|id|string|メンバーId|
+|href|string||
+|type|string|メンバーのロールの種類：`regular`, `account_owner`, `admin`|
+|first_name|string||
+|email|string|ユーザーのメールアドレス|
+|username|string|メンバーのユーザー名|
+|status|string|メンバーのステータス(グループへの招待が承認されたかどうか): `active`, `pending`|
+
+```json
+{
+  "id": "1",
+  "username": "username",
+  "email": "username@surveymonkey.com",
+  "type": "regular",
+  "status": "active",
+  "user_id": "1",
+  "language": "en",
+  "first_name": "firstname",
+  "last_name": "lastname",
+  "date_created": "2021-06-24T18:27:33+00:00",
+  "href": "https://api.surveymonkey.com/v3/groups/1/members/1"
+}
+```
+
+#### PATCH /groups/{group_id}/members/{member_id}
+`PATCH /groups/{group_id}/members/{member_id}`
+
+    `PATCH`: グループメンバーのメールアドレスを更新
 
 ### Surveyページと質問
 
