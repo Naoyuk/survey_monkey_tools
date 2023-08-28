@@ -74,7 +74,7 @@ OAuthプロセスを成功させるためには、すべての必須スコープ
 |Create/Modify Workgroups Shared Resources|ワークグループ内で共有されているリソースの追加/削除する|workgroups_shares_write|有料|
 
 ### リクエストとレスポンスの制限
-ドラフトおよびプライベート・アプリはレート制限の対象となります：
+ドラフトおよびプライベート・アプリはレート制限の対象となります
 
 - 1分間の最大リクエスト数: **120**  
 - 1日の最大リクエスト数: **500**
@@ -129,7 +129,7 @@ OAuthリンクは、URLエンコードされたパラメータ(`redirect_uri`、
 私たちはその情報をすべて確認します。  
 問題がなければ、トークンを返します。
 
-##### Step3：長期間のアクセストークンと交換する
+##### Step3: 長期間のアクセストークンと交換する
 以下のエンコードされたフォームフィールドを持つ、`https://api.surveymonkey.com/oauth/token`へのフォームエンコードされたHTTP POSTリクエストを作成します:  
 - `client_id`
 - `client_secret`
@@ -184,7 +184,7 @@ SurveyMonkeyアカウントの最初の1,000件のSurveyを`GET /surveys`で取�
 ### ページネーション
 リストリソースをリクエストするときは、`per_page=#`でページのサイズを設定し、`page=#`でどのページを返すかを指定します。つまり、`https://api.surveymonkey.com/v3/surveys?page=2&per_page=5`へのリクエストは、5つのSurveyの2ページ目を返します。
 
-リストリソースへのどのリクエストも、利用可能な場合は以下のページ分割フィールドを返します：
+リストリソースへのどのリクエストも、利用可能な場合は以下のページ分割フィールドを返します
 
 |Name|Description|Type|
 |-|-|-|
@@ -283,7 +283,7 @@ Base URLs: `https://api.surveymonkey.com/v3`
 ##### 利用可能なメソッド
 - `HEAD`: リソースが利用可能かをチェックする
 - `OPTIONS`: 利用可能なメソッドとオプションを返す
-- `GET`: 現在のユーザーのアカウント詳細(プランも含む)を返す。公開アプリのユーザーは、**View Users**スコープのパラメータにアクセスする必要があります：
+- `GET`: 現在のユーザーのアカウント詳細(プランも含む)を返す。公開アプリのユーザーは、**View Users**スコープのパラメータにアクセスする必要があります
 
 ##### Responseスキーマ
 Status Code: 200
@@ -382,7 +382,7 @@ Status Code: 200
 ##### 利用可能なメソッド
 - `HEAD`: リソースが利用可能かをチェックする
 - `OPTIONS`: 利用可能なメソッドとオプションを返す
-- `GET`: 特定のユーザーが属するグループを返す。公開アプリのユーザーは、**View Workgroups**スコープにアクセスする必要があります：
+- `GET`: 特定のユーザーが属するグループを返す。公開アプリのユーザーは、**View Workgroups**スコープにアクセスする必要があります
 
 ##### GETのオプションクエリ
 |Name|Type|Required|Description|
@@ -476,7 +476,7 @@ Status Code: 200
 ##### 利用可能なメソッド
 - `HEAD`: リソースが利用可能かをチェックする
 - `OPTIONS`: 利用可能なメソッドとオプションを返す
-- `GET`: 全てのワークグループでユーザーと共有されているリソースを返す。公開アプリのユーザーは、**View Workgroup Shares**スコープにアクセスする必要があります：
+- `GET`: 全てのワークグループでユーザーと共有されているリソースを返す。公開アプリのユーザーは、**View Workgroup Shares**スコープにアクセスする必要があります
 
 ##### GETのオプションクエリ
 |Name|Type|Required|Description|
@@ -534,7 +534,7 @@ Status Code: 200
 ##### 利用可能なメソッド
 - `HEAD`: リソースが利用可能かをチェックする
 - `OPTIONS`: 利用可能なメソッドとオプションを返す
-- `GET`: ユーザアカウントがチームに所属している場合、チームを返す (ユーザは1つのチームにしか所属できない)。公開アプリのユーザーは、**View Teams**スコープにアクセスする必要があります：
+- `GET`: ユーザアカウントがチームに所属している場合、チームを返す (ユーザは1つのチームにしか所属できない)。公開アプリのユーザーは、**View Teams**スコープにアクセスする必要があります
 
 ##### GETのオプションクエリ
 |Name|Type|Required|Description|
@@ -581,7 +581,7 @@ Status Code: 200
 ##### 利用可能なメソッド
 - `HEAD`: リソースが利用可能かをチェックする
 - `OPTIONS`: 利用可能なメソッドとオプションを返す
-- `GET`: チームのオーナーやメールアドレスなど、チームの詳細を返す。公開アプリのユーザーは、**View Teams**スコープにアクセスする必要があります：
+- `GET`: チームのオーナーやメールアドレスなど、チームの詳細を返す。公開アプリのユーザーは、**View Teams**スコープにアクセスする必要があります
 
 ##### Responseスキーマ
 Status Code: 200
@@ -610,7 +610,7 @@ Status Code: 200
 `GET /groups/{id}/activities`
 
 ##### 利用可能なメソッド
-- `GET`: 指定されたグループのActivity関連データのリストを返す。公開アプリのユーザーは、adminである必要があります：
+- `GET`: 指定されたグループのActivity関連データのリストを返す。公開アプリのユーザーは、adminである必要があります
 
 ##### GETのオプションクエリ
 |Name|Type|Required|Description|
@@ -672,7 +672,7 @@ Status Code: 200
 `GET /groups/{id}/activities/{activity_type}`
 
 ##### 利用可能なメソッド
-- `GET`: Activity列挙型の値が指定された場合、指定されたグループのインターバルごとの特定のActivityのカウントを返す。公開アプリのユーザーは、adminである必要があります：
+- `GET`: Activity列挙型の値が指定された場合、指定されたグループのインターバルごとの特定のActivityのカウントを返す。公開アプリのユーザーは、adminである必要があります
 
 ##### ActivityタイプのEnum
 - authentication_succeeded
@@ -739,7 +739,7 @@ Status Code: 200
 ##### 利用可能なメソッド
 - `HEAD`: リソースが利用可能かをチェックする
 - `OPTIONS`: 利用可能なメソッドとオプションを返す
-- `GET`: 指定したグループのメンバーとして追加されたユーザーのリストを返す。公開アプリのユーザーは、**View Teams**スコープにアクセスする必要があります：
+- `GET`: 指定したグループのメンバーとして追加されたユーザーのリストを返す。公開アプリのユーザーは、**View Teams**スコープにアクセスする必要があります
 
 ##### GETのオプションクエリ
 |Name|Type|Required|Description|
@@ -796,7 +796,7 @@ Status Code: 200
 ##### 利用可能なメソッド
 - `HEAD`: リソースが利用可能かをチェックする
 - `OPTIONS`: 利用可能なメソッドとオプションを返す
-- `GET`: グループメンバーの`role`や`status`などの詳細を返す。公開アプリのユーザーは、**View Teams**スコープにアクセスする必要があります：
+- `GET`: グループメンバーの`role`や`status`などの詳細を返す。公開アプリのユーザーは、**View Teams**スコープにアクセスする必要があります
 
 ##### Responseスキーマ
 Status Code: 200
@@ -809,7 +809,7 @@ Status Code: 200
 |language|string||
 |id|string|メンバーId|
 |href|string||
-|type|string|メンバーのロールの種類：`regular`, `account_owner`, `admin`|
+|type|string|メンバーのロールの種類: `regular`, `account_owner`, `admin`|
 |first_name|string||
 |email|string|ユーザーのメールアドレス|
 |username|string|メンバーのユーザー名|
@@ -837,6 +837,430 @@ Status Code: 200
     `PATCH`: グループメンバーのメールアドレスを更新
 
 ### Surveyページと質問
+フォルダはSurveyを整理するために使用されます。  
+以下のエンドポイントを使用すると、フォルダを取得および作成できます。  
+`folder_id`を含む**/surveys**へのPOST、PUT、またはPATCHを使用して、Surveyを特定のフォルダに追加することができます。  
+GET **/surveys**のクエリパラメータとして`folder_id`を使用することにより、Surveyをフォルダでフィルタすることもできます。
+
+#### GET /surveys
+`GET /surveys`
+
+##### 利用可能なメソッド
+- `HEAD`: リソースが利用可能かをチェックする
+- `OPTIONS`: 利用可能なメソッドとオプションを返す
+- `GET`: 認証されたユーザーが所有または共有しているアンケートのリストを返す。公開アプリのユーザーは、**View Surveys**スコープにアクセスする必要があります
+- `POST`: 新しい空のSurveyを作成するか、テンプレートID または既存のSurveyID が指定されている場合は、ページと質問があらかじめ入力されたSurveyを作成する。  
+公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
+
+##### GETのオプションクエリ
+|Name|Type|Required|Description|
+|-|-|-|-|
+|page|string|false|リソースのどのページを返すか。デフォルトは1|
+|per_page|string|false|ページごとに返すリソースの数|
+|sort_by|string-Enum|false|返されたSurveyのソートに使用するフィールド: `title`, `date_modified`, or `num_responses`|
+|sort_order|string-Enum|false|ソート順`ASC`または`DESC`|
+|include|comma seperated string-Enum|false|Surveyのリストをフィルタリングするために使用する: `share_with`, `share_by`または`owner` (チームで使用する場合に便利)またはSurveyごとに返す追加のフィールドを指定するために使用する: `response_count`, `date_created`, `date_modified`, `language`, `question_count`, `analyze_url`, `preview`, `collect_stats`|
+|title|string|false|タイトルでSurveyを検索|
+|start_modified_at|string|false|Surveyの最終更新日は、この日付以降である必要がある。YYYY-MM-DDTHH:MM:SS形式(オフセットなし)|
+|end_modified_at|string|false|Surveyの最終更新日は、この日付より前である必要がある。YYYY-MM-DDTHH:MM:SS形式(オフセットなし)|
+|folder_id|string|false|フォルダ ID を指定して、そのフォルダ内の調査のみを返す|
+
+##### Responseスキーマ
+Status Code: 200
+
+|Name|Type|Description|
+|-|-|-|
+|per_page|integer||
+|total|integer||
+|data|[object]||
+|id|string|SurveyID|
+|title|string|Surveyタイトル|
+|nickname|string|Surveyのニックネーム|
+|href|string|SurveyのリソースURL|
+|links|object||
+|next|string||
+|last|string||
+|self|string||
+|page|integer||
+
+```
+{
+  "data": [
+    {
+      "id": "1234",
+      "title": "My Survey",
+      "nickname": "",
+      "href": "https://api.surveymonkey.com/v3/surveys/1234"
+    }
+  ],
+  "per_page": 50,
+  "page": 1,
+  "total": 1,
+  "links": {
+    "self": "https://api.surveymonkey.com/v3/surveys?page=1&per_page=50",
+    "next": "https://api.surveymonkey.com/v3/surveys?page=2&per_page=50",
+    "last": "https://api.surveymonkey.com/v3/surveys?page=5&per_page=50"
+  }
+}
+```
+
+#### POST /surveys
+`POST /surveys`
+
+##### Call Types:
+- `Blank`: Surveyをスクラッチで作成
+- `Copy`: 既存SurveyまたはテンプレートからSurveryを作成
+- `Bulk`: 一度に複数のSurveyを作成
+
+##### POST /surveysのリクエストボディ
+|Name|Type|Required|Call|Description|
+|-|-|-|-|-|
+|TITLE|STRING|FALSE|`Copy` `Blank` `Bulk`|Surveyのタイトル(デフォルト="New Survey")|
+|from_template_id|string|false|`Copy`|`Copy`元のSurveyテンプレート。Survey_templates を参照(from_survey_id が指定されていない場合は必須)|
+|from_survey_id|string|false|`Copy`|`Copy`元のSurveyID(from_template_id が指定されていない場合は必須)|
+|from_team_template_id|string|false|`Copy`|`Copy`元となるチームSurveyテンプレート。team_survey_templates を参照|
+|nickname|string|false|`Blank` `Bulk` (default=‘’)|Surveyのニックネーム|
+|language|string|false|`Blank` `Bulk` (default=‘en’)|Surveyの言語|
+|buttons_text|object|false|`Blank` `Bulk`|Surveyボタンに表示する文字列のコンテナ|
+|next_button|string|false|`Blank` `Bulk`|ボタンテキスト|
+|prev_button|string|false|`Blank` `Bulk`|ボタンテキスト|
+|exit_button|string|false|`Blank` `Bulk`|ボタンテキスト。空の場合はSurveyから除外される|
+|done_button|string|false|`Blank` `Bulk`|ボタンテキスト|
+|custom_variables|object|false|`Blank`|Survey変数のディクショナリー|
+|footer|boolean|false|`Blank`|falseの場合、SurveyMonkeyのフッターが非表示になる(デフォルトはtrue)|
+|folder_id|string|false|`Blank`|指定された場合、Surveyをその ID のフォルダに追加|
+|theme_id|integer|false|`Blank`|指定された場合、提供されたテーマを使用してSurveyを作成|
+|quiz_options|object|false|`Blank`|このSurveyがクイズの場合、クイズの設定を記述するオブジェクト|
+|is_quiz_mode|boolean|true|`Blank`|このSurveyをクイズとして設定するオン/オフの切り替え|
+|default_question_feedback|object|false|`Blank`|このSurveyで新しく作成された質問に対するデフォルトのフィードバックを含むオブジェクト|
+|correct_text|string|true|`Blank`|正解を示すテキスト|
+|incorrect_text|string|true|`Blank`|不正解の場合に表示されるテキスト|
+|partial_text|string|true|`Blank`|答えが部分的に正しい場合に表示されるテキスト|
+|show_results_type|string|true|`Blank`|ユーザーがクイズを完了したときに何を表示するか: 無効、結果のみ、または結果と回答|
+|feedback|object|true|`Blank`|ユーザがクイズを完了したときに表示するテキスト|
+|ranges_type|string|true|`Blank`|以下のパラメータがパーセンテージを使用するか、ポイントを使用するかを設定する。これらの範囲は包括的であり、重複しないことに注意|
+|ranges|[object]|true|`Blank`|ユーザーに特定のフィードバックを表示する範囲|
+|min|integer|true|`Blank`|このフィードバックの最低スコア|
+|max|integer|true|`Blank`|このフィードバックの最高得点|
+|message|string|true|`Blank`|フィードバックメッセージ|
+|pages|[object]|true|`Bulk`|作成されるページ|
+|questions|array|true|`Bulk`|作成される質問|
+
+```
+{
+  "title": "New Survey",
+  "from_template_id": "",
+  "from_survey_id": "",
+  "from_team_template_id": "",
+  "nickname": "My Survey",
+  "language": "en",
+  "buttons_text": {
+    "next_button": "string",
+    "prev_button": "string",
+    "exit_button": "string",
+    "done_button": "string"
+  },
+  "custom_variables": {},
+  "footer": true,
+  "folder_id": "",
+  "theme_id": 1506280,
+  "quiz_options": {
+    "is_quiz_mode": true,
+    "default_question_feedback": {
+      "correct_text": "string",
+      "incorrect_text": "string",
+      "partial_text": "string"
+    },
+    "show_results_type": "string",
+    "feedback": {
+      "ranges_type": "string",
+      "ranges": [
+        {
+          "min": 0,
+          "max": 0,
+          "message": "string"
+        }
+      ]
+    }
+  },
+  "pages": [
+    {
+      "questions": [
+        "See formatting question types for more details"
+      ]
+    }
+  ]
+}
+```
+
+##### Responseスキーマ
+Status Code: 201
+
+|Name|Type|Description|
+|-|-|-|
+|id|string|SurveyId|
+|title|string|Surveyタイトル|
+|nickname|string|Surveyのニックネーム|
+|custom_variables|object|Survey変数のディクショナリー|
+|category|string|Surveyの作成時に選んだカテゴリー|
+|language|string|Surveyの言語のISO 639-1コード|
+|question_count|integer|Surveyの質問数|
+|page_count|integer|Surveyのページ数|
+|date_created|string|Surveyの作成日時。YYYY-MM-DDTHH:MM:SS形式(オフセットなし)|
+|date_modified|string|Surveyの最終更新日時。YYYY-MM-DDTHH:MM:SS形式(オフセットなし)|
+|buttons_text|object||
+|next_button|string|ボタンテキスト|
+|prev_button|string|ボタンテキスト|
+|exit_button|string|ボタンテキスト|
+|done_button|string|ボタンテキスト|
+|preview|string|SurveyプレビューURL|
+|folder_id|string|該当する場合、SurveyのフォルダのID|
+|edit_url|string|Survey編集URL|
+|collect_url|string|SurveyコレクトURL|
+|analyze_url|string|Survey分析URL|
+|summary_url|string|SurveyサマリーURL|
+|href|string|リソースAPI URL|
+|response_count|integer|Surveyが受け取ったレスポンス数|
+|footer|boolean|SurveyMonkeyのフッターが表示されるかどうか|
+
+#### GET /surveys/{id}
+`GET /surveys/{id}`
+
+##### 利用可能なメソッド
+- `HEAD`: リソースが利用可能かをチェックする
+- `OPTIONS`: 利用可能なメソッドとオプションを返す
+- `GET`: Surveyの詳細を返す。すべてのページと質問を表示する詳細を取得するには /surveys/{survey_id}/details を使用する。**View Surveys**スコープが必要
+- `PATCH`: Surveyのタイトル、ニックネーム、言語を変更する。公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
+- `PUT`: Surveyを置き換えます。リクエストボディの引数は POST /surveys と同じ。公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
+- `DELETE`: Surveyを削除する。公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
+
+##### GETのオプションクエリ
+|Name|Type|Required|Description|
+|-|-|-|-|
+|include|comma seperated string-Enum|false|追加情報を指定するために使用する。詳細なコレクターステータスのためにサポートされる値: `collect_stats`|
+
+##### Responseスキーマ
+Status Code: 200
+
+|Name|Type|Description|
+|-|-|-|
+
+
+#### PUT /surveys/{id}
+`PUT /surveys/{id}`
+
+#### PATCH /surveys/{id}
+`PATCH /surveys/{id}`
+
+#### GET /surveys/{id}/details
+`GET /surveys/{id}/details`
+
+##### 利用可能なメソッド
+- `HEAD`: リソースが利用可能かをチェックする
+- `OPTIONS`: 利用可能なメソッドとオプションを返す
+- `GET`: 認証されたユーザーが所有または共有しているアンケートのリストを返す。公開アプリのユーザーは、**View Surveys**スコープにアクセスする必要があります
+- `POST`: 新しい空のSurveyを作成するか、テンプレートID または既存のSurveyID が指定されている場合は、ページと質問があらかじめ入力されたSurveyを作成する。  
+公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
+
+##### GETのオプションクエリ
+|Name|Type|Required|Description|
+|-|-|-|-|
+
+
+##### Responseスキーマ
+Status Code: 200
+
+|Name|Type|Description|
+|-|-|-|
+
+
+#### GET /survey_categories
+`GET /survey_categories`
+
+##### 利用可能なメソッド
+- `HEAD`: リソースが利用可能かをチェックする
+- `OPTIONS`: 利用可能なメソッドとオプションを返す
+- `GET`: 認証されたユーザーが所有または共有しているアンケートのリストを返す。公開アプリのユーザーは、**View Surveys**スコープにアクセスする必要があります
+- `POST`: 新しい空のSurveyを作成するか、テンプレートID または既存のSurveyID が指定されている場合は、ページと質問があらかじめ入力されたSurveyを作成する。  
+公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
+
+##### GETのオプションクエリ
+|Name|Type|Required|Description|
+|-|-|-|-|
+
+
+##### Responseスキーマ
+Status Code: 200
+
+|Name|Type|Description|
+|-|-|-|
+
+
+#### GET /survey_templates
+`GET /survey_templates`
+
+##### 利用可能なメソッド
+- `HEAD`: リソースが利用可能かをチェックする
+- `OPTIONS`: 利用可能なメソッドとオプションを返す
+- `GET`: 認証されたユーザーが所有または共有しているアンケートのリストを返す。公開アプリのユーザーは、**View Surveys**スコープにアクセスする必要があります
+- `POST`: 新しい空のSurveyを作成するか、テンプレートID または既存のSurveyID が指定されている場合は、ページと質問があらかじめ入力されたSurveyを作成する。  
+公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
+
+##### GETのオプションクエリ
+|Name|Type|Required|Description|
+|-|-|-|-|
+
+
+##### Responseスキーマ
+Status Code: 200
+
+|Name|Type|Description|
+|-|-|-|
+
+
+#### GET /team_survey_templates
+`GET /team_survey_templates`
+
+##### 利用可能なメソッド
+- `HEAD`: リソースが利用可能かをチェックする
+- `OPTIONS`: 利用可能なメソッドとオプションを返す
+- `GET`: 認証されたユーザーが所有または共有しているアンケートのリストを返す。公開アプリのユーザーは、**View Surveys**スコープにアクセスする必要があります
+- `POST`: 新しい空のSurveyを作成するか、テンプレートID または既存のSurveyID が指定されている場合は、ページと質問があらかじめ入力されたSurveyを作成する。  
+公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
+
+##### GETのオプションクエリ
+|Name|Type|Required|Description|
+|-|-|-|-|
+
+
+##### Responseスキーマ
+Status Code: 200
+
+|Name|Type|Description|
+|-|-|-|
+
+
+#### GET /survey_languages
+`GET /survey_languages`
+
+##### 利用可能なメソッド
+- `HEAD`: リソースが利用可能かをチェックする
+- `OPTIONS`: 利用可能なメソッドとオプションを返す
+- `GET`: 認証されたユーザーが所有または共有しているアンケートのリストを返す。公開アプリのユーザーは、**View Surveys**スコープにアクセスする必要があります
+- `POST`: 新しい空のSurveyを作成するか、テンプレートID または既存のSurveyID が指定されている場合は、ページと質問があらかじめ入力されたSurveyを作成する。  
+公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
+
+##### GETのオプションクエリ
+|Name|Type|Required|Description|
+|-|-|-|-|
+
+
+##### Responseスキーマ
+Status Code: 200
+
+|Name|Type|Description|
+|-|-|-|
+
+
+#### GET /surveys/{id}/pages
+`GET /surveys/{id}/pages`
+
+##### 利用可能なメソッド
+- `HEAD`: リソースが利用可能かをチェックする
+- `OPTIONS`: 利用可能なメソッドとオプションを返す
+- `GET`: 認証されたユーザーが所有または共有しているアンケートのリストを返す。公開アプリのユーザーは、**View Surveys**スコープにアクセスする必要があります
+- `POST`: 新しい空のSurveyを作成するか、テンプレートID または既存のSurveyID が指定されている場合は、ページと質問があらかじめ入力されたSurveyを作成する。  
+公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
+
+##### GETのオプションクエリ
+|Name|Type|Required|Description|
+|-|-|-|-|
+
+
+##### Responseスキーマ
+Status Code: 200
+
+|Name|Type|Description|
+|-|-|-|
+
+
+#### POST /surveys/{id}/pages
+`POST /surveys/{id}/pages`
+
+#### GET /surveys/{survey_id}/pages/{page_id}
+`GET /surveys/{survey_id}/pages/{page_id}`
+
+##### 利用可能なメソッド
+- `HEAD`: リソースが利用可能かをチェックする
+- `OPTIONS`: 利用可能なメソッドとオプションを返す
+- `GET`: 認証されたユーザーが所有または共有しているアンケートのリストを返す。公開アプリのユーザーは、**View Surveys**スコープにアクセスする必要があります
+- `POST`: 新しい空のSurveyを作成するか、テンプレートID または既存のSurveyID が指定されている場合は、ページと質問があらかじめ入力されたSurveyを作成する。  
+公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
+
+##### GETのオプションクエリ
+|Name|Type|Required|Description|
+|-|-|-|-|
+
+
+##### Responseスキーマ
+Status Code: 200
+
+|Name|Type|Description|
+|-|-|-|
+
+
+#### PATCH /surveys/{survey_id}/pages/{page_id}
+`PATCH /surveys/{survey_id}/pages/{page_id}`
+
+#### PUT /surveys/{survey_id}/pages/{page_id}
+`PUT /surveys/{survey_id}/pages/{page_id}`
+
+#### GET /surveys/{survey_id}/pages/{page_id}/questions
+`GET /surveys/{survey_id}/pages/{page_id}/questions`
+
+##### 利用可能なメソッド
+- `HEAD`: リソースが利用可能かをチェックする
+- `OPTIONS`: 利用可能なメソッドとオプションを返す
+- `GET`: 認証されたユーザーが所有または共有しているアンケートのリストを返す。公開アプリのユーザーは、**View Surveys**スコープにアクセスする必要があります
+- `POST`: 新しい空のSurveyを作成するか、テンプレートID または既存のSurveyID が指定されている場合は、ページと質問があらかじめ入力されたSurveyを作成する。  
+公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
+
+##### GETのオプションクエリ
+|Name|Type|Required|Description|
+|-|-|-|-|
+
+
+##### Responseスキーマ
+Status Code: 200
+
+|Name|Type|Description|
+|-|-|-|
+
+
+#### POST /surveys/{survey_id}/pages/{page_id}/questions
+`POST /surveys/{survey_id}/pages/{page_id}/questions`
+
+#### GET /surveys/{survey_id}/pages/{page_id}/questions/{quesiton_id}
+`GET /surveys/{survey_id}/pages/{page_id}/questions/{quesiton_id}`
+
+##### 利用可能なメソッド
+- `HEAD`: リソースが利用可能かをチェックする
+- `OPTIONS`: 利用可能なメソッドとオプションを返す
+- `GET`: 認証されたユーザーが所有または共有しているアンケートのリストを返す。公開アプリのユーザーは、**View Surveys**スコープにアクセスする必要があります
+- `POST`: 新しい空のSurveyを作成するか、テンプレートID または既存のSurveyID が指定されている場合は、ページと質問があらかじめ入力されたSurveyを作成する。  
+公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
+
+##### GETのオプションクエリ
+|Name|Type|Required|Description|
+|-|-|-|-|
+
+
+##### Responseスキーマ
+Status Code: 200
+
+|Name|Type|Description|
+|-|-|-|
+
 
 ### 質問バンク
 
