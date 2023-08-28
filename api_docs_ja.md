@@ -308,8 +308,167 @@ Status Code: 200
 |features|object|ユーザーが利用できる機能。これらは文字列またはブーリアン値で識別される|
 |href|string|このエンドポイントに関連するリンク|
 
+```
+{
+  "id": "1",
+  "username": "username",
+  "first_name": "firstName",
+  "last_name": "lastName",
+  "language": "en",
+  "email": "firstnamelastname@surveymonkey.com",
+  "email_verified": false,
+  "account_type": "enterprise",
+  "date_created": "2021-05-27T16:29:00+00:00",
+  "date_last_login": "2021-06-21T13:57:15.657000+00:00",
+  "question_types": {
+    "comment_box_question_type": true,
+    "file_upload_question_type": true,
+    "matrix_question_type": true,
+    "ranking_question_type": true,
+    "rating_question_type": false,
+    "slider_question_type": true,
+    "star_rating_question_type": true,
+    "textbox_multiple_question_type": true,
+    "video_question_type": false
+  },
+  "scopes": {
+    "granted": [
+      "surveys_write",
+      "surveys_read"
+    ],
+    "available": [
+      "users_read",
+      "surveys_read",
+      "collectors_read",
+      "collectors_write",
+      "contacts_read",
+      "contacts_write",
+      "surveys_write",
+      "responses_read",
+      "responses_read_detail",
+      "responses_write",
+      "groups_read",
+      "groups_write",
+      "webhooks_read",
+      "webhooks_write",
+      "library_read",
+      "workgroups_read",
+      "workgroups_write",
+      "workgroups_members_read",
+      "workgroups_members_write",
+      "roles_read",
+      "roles_write",
+      "workgroups_shares_read",
+      "workgroups_shares_write"
+    ]
+  },
+  "sso_connections": [
+    "enterprise_saml"
+  ],
+  "features": {
+    "collector_create_limit": "unlimited",
+    "collector_email_enabled": true,
+    "collector_thank_you_enabled": true,
+    "create_question_limit": "unlimited",
+    "num_free_responses": "unlimited"
+  },
+  "href": "https://api.surveymonkey.com/v3/users/me"
+}
+```
+
 #### GET /users/{user_id}/workgroups
 `GET /users/{user_id}/workgroups`
+
+##### 利用可能なメソッド
+- `HEAD`: リソースが利用可能かをチェックする
+- `OPTIONS`: 利用可能なメソッドとオプションを返す
+- `GET`: 特定のユーザーが属するグループを返す。公開アプリのユーザーは、**View Workgroups**スコープにアクセスする必要があります：
+
+##### GETのオプションクエリ
+|Name|Type|Required|Description|
+|-|-|-|-|
+|per_page|string|false|ページごとに返すリソースの数。デフォルトは50|
+|page|string|false|リソースのどのページを返すか。デフォルトは1|
+
+##### Responseスキーマ
+Status Code: 200
+
+|Name|Type|Description|
+|-|-|-|
+|data|[object]|ワークグループに関連する情報|
+|id|string|ユーザーID|
+|name|string|ワークグループ名|
+|description|string|ワークグループの説明|
+|is_visible|boolean|ワークグループを一般に公開するか、メンバーと管理者のみに公開するかのブール値|
+|metadata|object|ワークグループに関連する追加データ|
+|created_at|string|ワークグループが作成された日時|
+|updated_at|string|ワークグループが最後に更新された日時|
+|members|[object]|ワークグループのアクティブメンバー|
+|user_id|string|正会員のユーザーID|
+|is_owner|boolean|アクティブメンバーはワークグループのオーナーであるというブール値|
+|membership|object|要求されたユーザーの会員情報|
+|is_owner|boolean|ユーザーはワークグループのオーナーかどうかのブール値|
+|status|string|ユーザーのステータス。[`active`,`pending`]のいずれか|
+|shares_count|integer|ワークグループと共有するリソースの数|
+|members_count|integer|ワークグループのメンバー数(non-activeを含む)|
+|default_role|object|ワークグループのデフォルトロール|
+|id|string|ワークグループのID|
+|name|string|デフォルトロールのタイプ。[`Analyzer`,`Collector`,`Full Access`,`Viewer`,`Editor`]のいずれか|
+|description|string|デフォルトロールに関する追加情報|
+|is_enabled|boolean|デフォルトロールはenabled|
+|metadata|object|デフォルトロールの追加メタデータ|
+|organization_id|string|このワークグループが所属する組織のID|
+|per_page|integer|ページごとに返されるリソースの数|
+|page|integer|返されたリソースのページ|
+|total|integer|返されたワークグループの数|
+|links|object|このエンドポイントのリンクを含む|
+|self|string|このエンドポイントに関連するリンク|
+
+```
+{
+  "data": [
+    {
+      "id": "1",
+      "name": "name",
+      "description": "some description",
+      "is_visible": true,
+      "metadata": {},
+      "created_at": "2019-05-22T17:38:58",
+      "updated_at": "2020-07-29T20:32:33",
+      "members": [
+        {
+          "user_id": "2",
+          "is_owner": true
+        },
+        {
+          "user_id": "1",
+          "is_owner": false
+        }
+      ],
+      "membership": {
+        "status": "active",
+        "is_owner": true
+      },
+      "shares_count": 3,
+      "members_count": 2,
+      "default_role": {
+        "id": "2",
+        "name": "Viewer",
+        "description": "",
+        "is_enabled": true,
+        "metadata": {}
+      },
+      "organization_id": "1"
+    }
+  ],
+  "per_page": 50,
+  "page": 1,
+  "total": 1,
+  "links": {
+    "self": "https://api.surveymonkey.com/v3/users/2/workgroups?page=1&per_page=50"
+  }
+}
+```
 
 #### GET /users/{user_id}/shared
 `GET /users/{user_id}/shared`
