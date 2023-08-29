@@ -1153,6 +1153,47 @@ Status Code: 200
 |analyze_url|string||
 |summary_url|string||
 |page_count|integer||
+```json
+{
+  "title": "New Survey",
+  "nickname": "",
+  "language": "en",
+  "folder_id": "0",
+  "category": "",
+  "question_count": 0,
+  "page_count": 1,
+  "response_count": 0,
+  "date_created": "2021-07-26T18:09:00",
+  "date_modified": "2021-07-26T19:32:00",
+  "id": "1",
+  "buttons_text": {
+    "next_button": "Next",
+    "prev_button": "Prev",
+    "done_button": "Done",
+    "exit_button": "Exit"
+  },
+  "is_owner": true,
+  "footer": true,
+  "custom_variables": {},
+  "href": "https://api.surveymonkey.com/v3/surveys/1",
+  "analyze_url": "https://www.surveymonkey.com/analyze/gel_2BAICXZEi4rH4ITcFzAin50QyBg8dHsw877lCBjYlk_3D",
+  "edit_url": "https://www.surveymonkey.com/create/?sm=gl_2BAICXZEi4rH4ITcFzAAin50QyBg8dHsw877lCBjYlk_3D",
+  "collect_url": "https://www.surveymonkey.com/collect/list?sm=gl_2BAICXZEi4rH4ITcFzAAin50QyBg8dHsw877lCBjYlk_3D",
+  "summary_url": "https://www.surveymonkey.com/summary/gl_2BAICCXZEi4rH4ITcFzAin50QyBg8dHsw877lCBjYlk_3D",
+  "preview": "https://www.surveymonkey.com/r/Preview/?sm=UY_2BlACesAm789uYe_2B0Zln_2Fs_2F9GndhH015uffhkTaxfBCBn3Gcj_2BTQrIRea7upQwrz",
+  "pages": [
+    {
+      "title": "",
+      "description": "",
+      "position": 1,
+      "question_count": 0,
+      "id": "1",
+      "href": "https://api.surveymonkey.com/v3/surveys/1/pages/1",
+      "questions": []
+    }
+  ]
+}
+```
 
 #### GET /survey_categories
 `GET /survey_categories`
@@ -1160,21 +1201,45 @@ Status Code: 200
 ##### 利用可能なメソッド
 - `HEAD`: リソースが利用可能かをチェックする
 - `OPTIONS`: 利用可能なメソッドとオプションを返す
-- `GET`: 認証されたユーザーが所有または共有しているアンケートのリストを返す。公開アプリのユーザーは、**View Surveys**スコープにアクセスする必要があります
-- `POST`: 新しい空のSurveyを作成するか、テンプレートID または既存のSurveyID が指定されている場合は、ページと質問があらかじめ入力されたSurveyを作成する。  
-公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
+- `GET`: Surveyテンプレートのフィルタリングに使用できるSurveyカテゴリのリストを返す。公開アプリのユーザーは、**View Library Assets**スコープにアクセスする必要があります
 
 ##### GETのオプションクエリ
 |Name|Type|Required|Description|
 |-|-|-|-|
-
+|page|string|false|リソースのどのページを返すか。デフォルトは1|
+|per_page|string|false|ページごとに返すリソースの数|
+|language|string-Enum|false|ISO 639-1 code for language to filter by (default=en)|
 
 ##### Responseスキーマ
 Status Code: 200
 
 |Name|Type|Description|
 |-|-|-|
+|per_page|integer||
+|page|integer||
+|total|integer||
+|data|[object]||
+|name|string|Resource name|
+|id|string|Resource id|
+|links|object||
+|self|string||
 
+```json
+{
+  "page": 1,
+  "per_page": 1,
+  "total": 1,
+  "data": [
+    {
+      "name": "Category Name",
+      "id": "community"
+    }
+  ],
+  "links": {
+    "self": "https://api.surveymonkey.com/v3/survey_categories?page=1&per_page=1"
+  }
+}
+```
 
 #### GET /survey_templates
 `GET /survey_templates`
@@ -1182,21 +1247,58 @@ Status Code: 200
 ##### 利用可能なメソッド
 - `HEAD`: リソースが利用可能かをチェックする
 - `OPTIONS`: 利用可能なメソッドとオプションを返す
-- `GET`: 認証されたユーザーが所有または共有しているアンケートのリストを返す。公開アプリのユーザーは、**View Surveys**スコープにアクセスする必要があります
-- `POST`: 新しい空のSurveyを作成するか、テンプレートID または既存のSurveyID が指定されている場合は、ページと質問があらかじめ入力されたSurveyを作成する。  
-公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
+- `GET`: Surveyテンプレートのリストを返す。SurveyテンプレートのIDは、新しいSurveyをPOSTする際の引数として使用できる。公開アプリのユーザーは、**View Library Assets**スコープにアクセスする必要があります
 
 ##### GETのオプションクエリ
 |Name|Type|Required|Description|
 |-|-|-|-|
-
+|page|string|false|リソースのどのページを返すか。デフォルトは1|
+|per_page|string|false|ページごとに返すリソースの数|
+|language|string-Enum|false|ISO 639-1 code for language to filter by (default=en)|
+|category|string-Enum|false|フィルターするカテゴリー。/survey_categories でフィルターし、指定しない場合は全てのカテゴリーを返す。|
 
 ##### Responseスキーマ
 Status Code: 200
 
 |Name|Type|Description|
 |-|-|-|
+|per_page	integer	|
+|page|integer||
+|total|integer||
+|data|[object]||
+|name|string|Resource name|
+|id|string|Resource id|
+|title|string|Survey title|
+|available|boolean|テンプレートが利用可能かどうかのブール値|
+|num_questions|integer|テンプレート内の質問数|
+|preview_link|string|Template preview URL|
+|description|string|Template description|
+|category|string|Template category|
+|links|object||
+|self|string||
 
+```json
+{
+  "page": 1,
+  "per_page": 1,
+  "total": 1,
+  "data": [
+    {
+      "category": "community",
+      "name": "Template Name",
+      "title": "Template Name",
+      "available": true,
+      "id": "49",
+      "num_questions": 10,
+      "description": "Template description",
+      "preview_link": "https://www.surveymonkey.com/r/Preview/?sm=ID"
+    }
+  ],
+  "links": {
+    "self": "https://api.surveymonkey.com/v3/survey_templates?page=1&per_page=1"
+  }
+}
+```
 
 #### GET /team_survey_templates
 `GET /team_survey_templates`
@@ -1204,21 +1306,46 @@ Status Code: 200
 ##### 利用可能なメソッド
 - `HEAD`: リソースが利用可能かをチェックする
 - `OPTIONS`: 利用可能なメソッドとオプションを返す
-- `GET`: 認証されたユーザーが所有または共有しているアンケートのリストを返す。公開アプリのユーザーは、**View Surveys**スコープにアクセスする必要があります
-- `POST`: 新しい空のSurveyを作成するか、テンプレートID または既存のSurveyID が指定されている場合は、ページと質問があらかじめ入力されたSurveyを作成する。  
-公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
+- `GET`: 呼び出し元のユーザーが所属するチームに対応するチームSurveyテンプレートのリストを返す。チームSurveyのテンプレートID(team_template_id) は、新しいアンケートを`POST`する際の引数として使用できる。公開アプリのユーザーは、**View Library Assets**スコープにアクセスする必要があります
 
 ##### GETのオプションクエリ
 |Name|Type|Required|Description|
 |-|-|-|-|
-
+|page|string|false|リソースのどのページを返すか。デフォルトは1|
+|per_page|string|false|ページごとに返すリソースの数|
 
 ##### Responseスキーマ
 Status Code: 200
 
 |Name|Type|Description|
 |-|-|-|
+|per_page|integer||
+|page|integer||
+|total|integer||
+|data|[object]||
+|name|string|Name of the team template|
+|team_template_id|string|Team template ID (新しいSureveyを作成するときに使うことができる)|
+|survey_id|string|このチームテンプレートの元となったSurveyのID|
+|links|object||
+|self|string||
 
+```json
+{
+  "page": 1,
+  "per_page": 1,
+  "total": 1,
+  "data": [
+    {
+      "name": "Template Name",
+      "team_template_id": "49",
+      "survey_id": "50"
+    }
+  ],
+  "links": {
+    "self": "https://api.surveymonkey.com/v3/survey_templates?page=1&per_page=1"
+  }
+}
+```
 
 #### GET /survey_languages
 `GET /survey_languages`
@@ -1242,6 +1369,10 @@ Status Code: 200
 |-|-|-|
 
 
+```json
+
+```
+
 #### GET /surveys/{id}/pages
 `GET /surveys/{id}/pages`
 
@@ -1263,6 +1394,10 @@ Status Code: 200
 |Name|Type|Description|
 |-|-|-|
 
+
+```json
+
+```
 
 #### POST /surveys/{id}/pages
 `POST /surveys/{id}/pages`
@@ -1288,6 +1423,10 @@ Status Code: 200
 |Name|Type|Description|
 |-|-|-|
 
+
+```json
+
+```
 
 #### PATCH /surveys/{survey_id}/pages/{page_id}
 `PATCH /surveys/{survey_id}/pages/{page_id}`
@@ -1317,6 +1456,10 @@ Status Code: 200
 |-|-|-|
 
 
+```json
+
+```
+
 #### POST /surveys/{survey_id}/pages/{page_id}/questions
 `POST /surveys/{survey_id}/pages/{page_id}/questions`
 
@@ -1341,6 +1484,10 @@ Status Code: 200
 |Name|Type|Description|
 |-|-|-|
 
+
+```json
+
+```
 
 ### 質問バンク
 
