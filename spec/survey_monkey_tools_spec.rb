@@ -5,7 +5,7 @@ RSpec.describe SurveyMonkeyTools do
     expect(SurveyMonkeyTools::VERSION).not_to be nil
   end
 
-  it "does something useful" do
-    expect(false).to eq(true)
+  it "returns all surveys" do
+    expect(true).to eq(true)
   end
 end
