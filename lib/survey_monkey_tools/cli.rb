@@ -22,22 +22,30 @@ module SurveyMonkeyTools
 
     desc "get", "get surveys"
     def get
-      access_token = ENV["ACCESS_TOKEN"]
+      headers = { Accept: "application/json", Authorization: "Bearer #{access_token}" }
+      req = Net::HTTP::Get.new("/v3/surveys", headers)
 
       begin
-        uri = URI.parse(BASE_URI)
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = true
-        headers = { Accept: "application/json", Authorization: "Bearer #{access_token}" }
-
-        req = Net::HTTP::Get.new("/v3/surveys", headers)
         res = http.request(req)
         data = res.body
 
         puts data
-      rescue => e
+      rescue StandardError => e
         puts e
       end
+    end
+
+    private
+
+    def access_token
+      ENV["ACCESS_TOKEN"]
+    end
+
+    def http
+      uri = URI.parse(BASE_URI)
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      http
     end
   end
 end
