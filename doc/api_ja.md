@@ -1044,13 +1044,70 @@ Status Code: 200
 
 |Name|Type|Description|
 |-|-|-|
-
+|id|string|Survey id|
+|title|string|Survey title|
+|nickname|string|Survey nickname|
+|custom_variables|object|Dictionary of survey variables|
+|category|string|Survey作成時に選択したSurvey category|
+|language|string|ISO 639-1 code for survey language|
+|question_count|integer|Number of questions in survey|
+|page_count|integer|Number of pages in survey|
+|date_created|string|Created date. Date string in format YYYY-MM-DDTHH:MM:SS (no offset)|
+|date_modified|string|Updated date. Date string in format YYYY-MM-DDTHH:MM:SS (no offset)|
+|buttons_text|object||
+|next_button|string|Button text|
+|prev_button|string|Button text|
+|exit_button|string|Button text|
+|done_button|string|Button text|
+|preview|string|Survey preview URL|
+|folder_id|string|該当する場合、SurveyのフォルダのID|
+|edit_url|string|Survey edit URL|
+|collect_url|string|Survey collect URL|
+|analyze_url|string|Survey analyze URL|
+|summary_url|string|Survey summary URL|
+|href|string|Resource API URL|
+|response_count|integer|Sureveyが受け取ったレスポンス数|
+|footer|boolean|SurveyMonkeyのフッターが表示されるかどうか|
 
 #### PUT /surveys/{id}
 `PUT /surveys/{id}`
 
+リクエスト・ボディはPOST /surveysと同じ
+
 #### PATCH /surveys/{id}
 `PATCH /surveys/{id}`
+
+##### PATCH /serveys/{id} のリクエストボディ
+|Name|Type|Required|Description|
+|-|-|-|-|
+|title|string|false|Survey title (PUT default="New Survey")|
+|nickname|string|false|Survey nickname (PUT default="")|
+|language|string|false|Survey language (PUT default="en")|
+|buttons_text|object|false|Surveyボタンに表示する文字列のコンテナ|
+|next_button|string|false|Button text|
+|prev_button|string|false|Button text|
+|exit_button|string|false|Button text(空の場合はボタンは除外される)|
+|done_button|string|false|Button text|
+|custom_variables|object|false|Dictionary of survey variables|
+|footer|boolean|false|falseの場合、SurveyMonkeyのフッターが非表示になる(デフォルトはtrue)|
+|folder_id|string|false|指定された場合、Surveyをその ID のフォルダに追加|
+
+```json
+{
+  "title": "New Survey",
+  "nickname": "My Survey",
+  "language": "en",
+  "buttons_text": {
+    "next_button": "string",
+    "prev_button": "string",
+    "exit_button": "string",
+    "done_button": "string"
+  },
+  "custom_variables": {},
+  "footer": true,
+  "folder_id": ""
+}
+```
 
 #### GET /surveys/{id}/details
 `GET /surveys/{id}/details`
