@@ -10,7 +10,7 @@ Install the gem and add to the application's Gemfile by executing:
 
 ## Usage
 
-    $ survey_monkey_tools copy
+    $ survey_monkey_tools get
 
 ## Development
 
