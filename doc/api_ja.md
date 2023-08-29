@@ -1113,23 +1113,46 @@ Status Code: 200
 `GET /surveys/{id}/details`
 
 ##### 利用可能なメソッド
-- `HEAD`: リソースが利用可能かをチェックする
-- `OPTIONS`: 利用可能なメソッドとオプションを返す
-- `GET`: 認証されたユーザーが所有または共有しているアンケートのリストを返す。公開アプリのユーザーは、**View Surveys**スコープにアクセスする必要があります
-- `POST`: 新しい空のSurveyを作成するか、テンプレートID または既存のSurveyID が指定されている場合は、ページと質問があらかじめ入力されたSurveyを作成する。  
-公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
-
-##### GETのオプションクエリ
-|Name|Type|Required|Description|
-|-|-|-|-|
-
+- `GET`: すべてのページオブジェクトのリストを含む`pages`要素を持つ展開されたSurveyリソースを返す。公開アプリのユーザーは、**View Surveys**スコープにアクセスする必要があります
 
 ##### Responseスキーマ
 Status Code: 200
 
 |Name|Type|Description|
 |-|-|-|
-
+|preview|string||
+|response_count|integer||
+|collect_url|string||
+|buttons_text|object||
+|exit_button|string||
+|prev_button|string||
+|done_button|string||
+|next_button|string||
+|footer|boolean||
+|date_created|string||
+|is_owner|boolean||
+|custom_variables|object||
+|language|string||
+|title|string||
+|question_count|integer||
+|pages|[object]||
+|question_count|integer||
+|questions|[string]||
+|description|string||
+|position|integer||
+|id|string||
+|href|string||
+|title|string||
+|date_modified|string||
+|nickname|string||
+|edit_url|string||
+|id|string||
+|href|string||
+|folder_id|string||
+|category|string||
+|analyze_url|string||
+|summary_url|string||
+|page_count|integer||
 
 #### GET /survey_categories
 `GET /survey_categories`
