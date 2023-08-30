@@ -1762,6 +1762,61 @@ SurveyMonkeyの質問タイプの詳細については、ヘルプセンター�
 ### 質問バンク
 
 ### Surveyフォルダ
+フォルダはSurveyを整理するために使います。  
+以下のエンドポイントにより、フォルダを取得/作成することができます。  
+POST, PUT, PATCH /surveys に`folder_id`を含むことでSurveyを特定のフォルダに追加することができます。  
+GET /surveys に`folder_id`クエリパラメータを追加して、フォルダによってSurveyをフィルタリングすることもできます。
+
+#### GET /survey_folders
+`GET /survey_folders`
+
+##### 利用可能なメソッド
+- `HEAD`: リソースが利用可能かをチェックする
+- `OPTIONS`: 利用可能なメソッドとオプションを返す
+- `POST`: 作成
+- `GET`: 利用可能なフォルダを返す
+
+##### GETのオプションクエリ
+
+|Name|Type|Required|Description|
+|-|-|-|-|
+|per_page|integer|false|ページごとに返すリソースの数|
+|page|integer|false|リソースのどのページを返すか。デフォルトは1|
+
+##### Responseスキーマ
+Status Code: 200
+
+|Name|Type|Description|
+|-|-|-|
+|per_page|integer|ページあたりのリソース数|
+|total|integer||
+|data|[object]||
+|num_surveys|integer|フォルダ内のSurvey数|
+|id|string|ID of the folder|
+|href|string|Link to the folder|
+|title|string|Name of the folder|
+|links|object||
+|self|string||
+|page|integer||
+
+#### POST /survey_folders
+`POST /survey_folders`
+
+##### POST /survey_folders のリクエストボディ
+
+|Name|Type|Required|Description|
+|-|-|-|-|
+|title|string|false|フォルダのタイトル|
+
+##### Responseスキーマ
+Status Code: 200
+
+|Name|Type|Description|
+|-|-|-|
+|title|string|フォルダのタイトル|
+|href|string|Link to the folder|
+|id|string|ID of the folder|
+|num_surveys|integer|フォルダ内のSurvey数|
 
 ### 翻訳と多言語対応
 
