@@ -1,16 +1,16 @@
 # SurveyMonkeyTools
 
-This is a utility tools for duplicating new surveys from last year.  
+This is a utility tools for bulk duplicating new surveys from existing surveys.
 
 ## Installation
 
-Install the gem and add to the application's Gemfile by executing:
+    $ copy .env.example .env
 
-    $ gem install survey_monkey_tools
+Replace the placeholder in `.env` with your own Access Token of SurveyMonkey App
 
 ## Usage
 
-    $ survey_monkey_tools get
+    $ bundle exec ruby exe/survey_monkey_tools get
 
 ## Development
 
