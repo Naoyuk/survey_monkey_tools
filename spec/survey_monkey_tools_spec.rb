@@ -19,7 +19,7 @@ RSpec.describe SurveyMonkeyTools do
       before do
         filepath = "fixtures/surveymonkey/get_surveys_response.json"
         body = File.read(File.join(__dir__, filepath))
-        surveymonkey_request("surveys").to_return(body: body, status: 200)
+        surveymonkey_request("/surveys").to_return(body: body, status: 200)
       end
 
       it "returns a success response" do
@@ -39,7 +39,18 @@ RSpec.describe SurveyMonkeyTools do
   end
 
   describe "#folders" do
-    it "returns a success response"
+    before do
+      filepath = "fixtures/surveymonkey/get_folders_response.json"
+      body = File.read(File.join(__dir__, filepath))
+      surveymonkey_request("/folders").to_return(body: body, status: 200)
+    end
+
+    it "returns a success response" do
+      survey_monkey_tools = SurveyMonkeyTools::CLI.new
+      response = survey_monkey_tools.response("/folders")
+
+      expect(response.code.to_i).to eq(200)
+    end
 
     it "returns a correct stdout"
   end
@@ -49,7 +60,7 @@ RSpec.describe SurveyMonkeyTools do
   end
 
   def surveymonkey_request(endpoint)
-    stub_request(:get, "#{SurveyMonkeyTools::BASE_URI}/v3/#{endpoint}").with(
+    stub_request(:get, "#{SurveyMonkeyTools::BASE_URI}/v3#{endpoint}").with(
       headers: {
         "Accept" => "application/json",
         "Authorization" => "Bearer #{ENV["ACCESS_TOKEN"]}"
