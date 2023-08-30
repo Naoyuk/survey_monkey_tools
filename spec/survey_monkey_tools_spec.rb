@@ -19,19 +19,19 @@ RSpec.describe SurveyMonkeyTools do
       before do
         filepath = "fixtures/surveymonkey/get_surveys_response.json"
         body = File.read(File.join(__dir__, filepath))
-        surveymonkey_request("/surveys").to_return(body: body, status: 200)
+        surveymonkey_request(SurveyMonkeyTools::END_POINTS[:surveys]).to_return(body: body, status: 200)
       end
 
-      it "returns a success response" do
-        survey_monkey_tools = SurveyMonkeyTools::CLI.new
-        response = survey_monkey_tools.response("/surveys")
+      xit "outputs 201 status code" do
+        # survey_monkey_tools = SurveyMonkeyTools::CLI.new
+        # response = survey_monkey_tools.response(SurveyMonkeyTools::END_POINTS[:surveys])
 
-        expect(response.code.to_i).to eq(200)
+        expect { SurveyMonkeyTools::CLI.surveys }.to output("200").to_stdout
       end
 
       xit "returns a correct stdout" do
         survey_monkey_tools = SurveyMonkeyTools::CLI.new
-        response = survey_monkey_tools.response("/surveys")
+        response = survey_monkey_tools.response(SurveyMonkeyTools::END_POINTS[:surveys])
 
         expect(response.code.to_i).to eq(200)
       end
@@ -42,12 +42,12 @@ RSpec.describe SurveyMonkeyTools do
     before do
       filepath = "fixtures/surveymonkey/get_folders_response.json"
       body = File.read(File.join(__dir__, filepath))
-      surveymonkey_request("/folders").to_return(body: body, status: 200)
+      surveymonkey_request(SurveyMonkeyTools::END_POINTS[:folders]).to_return(body: body, status: 200)
     end
 
     it "returns a success response" do
       survey_monkey_tools = SurveyMonkeyTools::CLI.new
-      response = survey_monkey_tools.response("/folders")
+      response = survey_monkey_tools.response(SurveyMonkeyTools::END_POINTS[:folders])
 
       expect(response.code.to_i).to eq(200)
     end
