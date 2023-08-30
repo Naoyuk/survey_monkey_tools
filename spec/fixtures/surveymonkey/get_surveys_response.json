@@ -1,0 +1,22 @@
+{
+    "data": [
+        {
+            "id": "xxxxxxxxx",
+            "title": "test2-2022-2023",
+            "nickname": "",
+            "href": "https://api.surveymonkey.com/v3/surveys/xxxxxxxxx"
+        },
+        {
+            "id": "yyyyyyyyy",
+            "title": "test1-2022-2023",
+            "nickname": "",
+            "href": "https://api.surveymonkey.com/v3/surveys/yyyyyyyyy"
+        }
+    ],
+    "per_page": 50,
+    "page": 1,
+    "total": 2,
+    "links": {
+        "self": "https://api.surveymonkey.com/v3/surveys?per_page=50&page=1"
+    }
+}
