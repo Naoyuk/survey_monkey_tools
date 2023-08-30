@@ -14,7 +14,7 @@ RSpec.describe SurveyMonkeyTools do
     end
   end
 
-  describe "#get" do
+  describe "#surveys" do
     context "when successfully accessed" do
       before do
         filepath = "fixtures/surveymonkey/get_surveys_response.json"
@@ -24,11 +24,28 @@ RSpec.describe SurveyMonkeyTools do
 
       it "returns a success response" do
         survey_monkey_tools = SurveyMonkeyTools::CLI.new
-        response = survey_monkey_tools.response_get_surveys
+        response = survey_monkey_tools.response("/surveys")
+
+        expect(response.code.to_i).to eq(200)
+      end
+
+      xit "returns a correct stdout" do
+        survey_monkey_tools = SurveyMonkeyTools::CLI.new
+        response = survey_monkey_tools.response("/surveys")
 
         expect(response.code.to_i).to eq(200)
       end
     end
+  end
+
+  describe "#folders" do
+    it "returns a success response"
+
+    it "returns a correct stdout"
+  end
+
+  describe "#create_folder" do
+    it "returns a success response"
   end
 
   def surveymonkey_request(endpoint)
