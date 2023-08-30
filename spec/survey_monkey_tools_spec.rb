@@ -2,6 +2,7 @@
 
 require "survey_monkey_tools"
 require "webmock/rspec"
+require "json"
 
 RSpec.describe SurveyMonkeyTools do
   describe "#version" do
@@ -16,31 +17,26 @@ RSpec.describe SurveyMonkeyTools do
   describe "#get" do
     context "when successfully accessed" do
       before do
-        surveymonkey_request("surveys")
+        filepath = "fixtures/surveymonkey/get_surveys_response.json"
+        body = File.read(File.join(__dir__, filepath))
+        surveymonkey_request("surveys").to_return(body: body, status: 200)
       end
 
-      it "returns all surveys" do
-        SurveyMonkeyTools::CLI.new
-        # expect(survey_monkey_tools.get.status).to eq(200)
-      end
-    end
+      it "returns a success response" do
+        survey_monkey_tools = SurveyMonkeyTools::CLI.new
+        response = survey_monkey_tools.response_get_surveys
 
-    context "when failed to access" do
-      it "returns error messages" do
-        expect(true).to eq(true)
+        expect(response.code.to_i).to eq(200)
       end
     end
   end
 
   def surveymonkey_request(endpoint)
-    stub_request(:get, "#{SurveyMonkeyTools::BASE_URI}/v3/#{endpoint}")
-      .with(
-        headers: {
-          "Accept" => "application/json",
-          "Accept-Encoding" => "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
-          "Authorization" => "Bearer #{ENV["ACCESS_TOKEN"]}",
-          "User-Agent" => "Ruby"
-        }
-      )
+    stub_request(:get, "#{SurveyMonkeyTools::BASE_URI}/v3/#{endpoint}").with(
+      headers: {
+        "Accept" => "application/json",
+        "Authorization" => "Bearer #{ENV["ACCESS_TOKEN"]}"
+      }
+    )
   end
 end
