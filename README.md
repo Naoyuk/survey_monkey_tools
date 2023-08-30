@@ -6,11 +6,16 @@ This is a utility tools for bulk duplicating new surveys from existing surveys.
 
     $ copy .env.example .env
 
-Replace the placeholder in `.env` with your own Access Token of SurveyMonkey App
+Replace the placeholder in `.env` with your own Access Token of SurveyMonkey App.  
+Set GitHub Secrets named ACCESS_TOKEN.
 
 ## Usage
 
     $ bundle exec ruby exe/survey_monkey_tools get
+
+## Features
+
+- GET /surveys
 
 ## Development
 
