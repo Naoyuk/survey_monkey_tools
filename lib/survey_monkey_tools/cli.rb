@@ -33,39 +33,12 @@ module SurveyMonkeyTools
     end
 
     desc "create_folder", "creates a folder"
-
     def create_folder(title)
       response = request(END_POINTS[:folders], title: title)
       message = response.code == "201" ? "Folder is successfully created" : "Error has occured"
       puts "#{message}\nStatus: #{response.code}\n#{response.body}"
     rescue StandardError => e
       puts e
-    end
-
-    no_commands do
-      def response(endpoint)
-        headers = { Accept: "application/json", Authorization: "Bearer #{access_token}" }
-        req = Net::HTTP::Get.new("/v3#{endpoint}", headers)
-
-        begin
-          http.request(req)
-        rescue StandardError => e
-          puts e
-        end
-      end
-
-      def request(endpoint, body)
-        headers = { Accept: "application/json", Authorization: "Bearer #{access_token}" }
-        req = Net::HTTP::Post.new("/v3#{endpoint}", headers)
-        req.content_type = "application/json"
-        req.body = body.to_json
-
-        begin
-          http.request(req)
-        rescue StandardError => e
-          puts e
-        end
-      end
     end
 
     private
@@ -79,6 +52,30 @@ module SurveyMonkeyTools
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
       http
+    end
+
+    def response(endpoint)
+      headers = { Accept: "application/json", Authorization: "Bearer #{access_token}" }
+      req = Net::HTTP::Get.new("/v3#{endpoint}", headers)
+
+      begin
+        http.request(req)
+      rescue StandardError => e
+        puts e
+      end
+    end
+
+    def request(endpoint, body)
+      headers = { Accept: "application/json", Authorization: "Bearer #{access_token}" }
+      req = Net::HTTP::Post.new("/v3#{endpoint}", headers)
+      req.content_type = "application/json"
+      req.body = body.to_json
+
+      begin
+        http.request(req)
+      rescue StandardError => e
+        puts e
+      end
     end
   end
 end
