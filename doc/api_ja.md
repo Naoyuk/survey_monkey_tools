@@ -14,7 +14,7 @@ APIを使用するには、SurveyMonkeyアカウントにドラフトアプリ�
 公開アプリは、スコープを使用してOAuth中にアプリのユーザーに許可を要求します。スコープによっては、アプリのユーザーが有料のSurveyMonkeyプランを持っている必要があります。
 
 [App Directory](https://www.surveymonkey.com/apps/)で公開されている公開アプリは、当社のAPIに無制限にリクエストできます。  
-公開アプリがドラフト（開発中）の場合は、ドラフトリクエストの制限に従います。
+公開アプリがドラフト(開発中)の場合は、ドラフトリクエストの制限に従います。
 
 #### Private Apps
 プライベートアプリはSurveyMonkeyによるレビューを受ける必要はありません。プライベートアプリは当社の利用規約に従います。  
@@ -105,7 +105,7 @@ Surveyの最大サイズ1000質問、制限を超えたSurveyは413を返しま�
 
 アプリが複数のSurveyMonkeyアカウントにアクセスする場合は、以下に説明するOAuth 2.0の3ステップフローを実装して、ユーザーがアプリでアカウントにアクセスすることを承認できるようにします。  
 このフローでは、アプリが関連するSurveyMonkeyアカウントへのAPI呼び出しのたびに使用できる、長期間のアクセストークンを生成します。  
-アクセストークンは、APIクレデンシャル（クライアントID）と組み合わせて使用した場合にのみアクセスを許可し、認証されたSurveyMonkeyアカウントのみにアクセスを許可することに注意してください。  
+アクセストークンは、APIクレデンシャル(クライアントID)と組み合わせて使用した場合にのみアクセスを許可し、認証されたSurveyMonkeyアカウントのみにアクセスを許可することに注意してください。  
 アプリはアクセスしたいSurveyMonkeyアカウントごとに追加のアクセストークンを取得する必要があります。
 
 アプリに必須のスコープがある場合、ユーザーはすべてのスコープを承認する必要があり、アプリへのOAuthを成功させるには有料のSurveyMonkeyプランが必要になる場合があります。
@@ -222,7 +222,7 @@ APIは以下のデータ型を返します
 |Boolean|真偽値。JSONでは、ネイティブのboolean型で表現されます。|
 |Date string|日付は通常YYYY-MM-DDTHH:MM:SS+HH:MMの形式です。これからの逸脱はドキュメントに示されています。すべての日付文字列は暗黙的にUTCになります。|
 |Phone number string|電話番号は+1XXXYYYZZZZの形式でなければなりません。|
-|Hex string|HHHHまたは#HHHHHH（Hは16進数）の形式でなければならない。|
+|Hex string|HHHHまたは#HHHHHH(Hは16進数)の形式でなければならない。|
 |Array|単純な値のリスト。JSONでは配列になります。|
 |Object|名前と値のペアのコレクション。JSONではオブジェクトになる。|
 |Null|ヌル値。JSONでは、これはネイティブのnull型として表現されます。|
@@ -848,9 +848,8 @@ GET **/surveys**のクエリパラメータとして`folder_id`を使用する�
 ##### 利用可能なメソッド
 - `HEAD`: リソースが利用可能かをチェックする
 - `OPTIONS`: 利用可能なメソッドとオプションを返す
-- `GET`: 認証されたユーザーが所有または共有しているアンケートのリストを返す。公開アプリのユーザーは、**View Surveys**スコープにアクセスする必要があります
-- `POST`: 新しい空のSurveyを作成するか、テンプレートID または既存のSurveyID が指定されている場合は、ページと質問があらかじめ入力されたSurveyを作成する。  
-公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
+- `GET`: 認証されたユーザーが所有または共有しているSurveyのリストを返す。公開アプリのユーザーは、**View Surveys**スコープにアクセスする必要があります
+- `POST`: 新しい空のSurveyを作成するか、テンプレートID または既存のSurveyID が指定されている場合は、ページと質問があらかじめ入力されたSurveyを作成する。公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
 
 ##### GETのオプションクエリ
 |Name|Type|Required|Description|
@@ -1306,7 +1305,7 @@ Status Code: 200
 ##### 利用可能なメソッド
 - `HEAD`: リソースが利用可能かをチェックする
 - `OPTIONS`: 利用可能なメソッドとオプションを返す
-- `GET`: 呼び出し元のユーザーが所属するチームに対応するチームSurveyテンプレートのリストを返す。チームSurveyのテンプレートID(team_template_id) は、新しいアンケートを`POST`する際の引数として使用できる。公開アプリのユーザーは、**View Library Assets**スコープにアクセスする必要があります
+- `GET`: 呼び出し元のユーザーが所属するチームに対応するチームSurveyテンプレートのリストを返す。チームSurveyのテンプレートID(team_template_id) は、新しいSurveyを`POST`する際の引数として使用できる。公開アプリのユーザーは、**View Library Assets**スコープにアクセスする必要があります
 
 ##### GETのオプションクエリ
 |Name|Type|Required|Description|
@@ -1353,24 +1352,45 @@ Status Code: 200
 ##### 利用可能なメソッド
 - `HEAD`: リソースが利用可能かをチェックする
 - `OPTIONS`: 利用可能なメソッドとオプションを返す
-- `GET`: 認証されたユーザーが所有または共有しているアンケートのリストを返す。公開アプリのユーザーは、**View Surveys**スコープにアクセスする必要があります
-- `POST`: 新しい空のSurveyを作成するか、テンプレートID または既存のSurveyID が指定されている場合は、ページと質問があらかじめ入力されたSurveyを作成する。  
-公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
+- `GET`: 多言語Surveyの翻訳生成に使用できるSurvey言語のリストを返す
 
 ##### GETのオプションクエリ
 |Name|Type|Required|Description|
 |-|-|-|-|
-
+|page|string|false|リソースのどのページを返すか。デフォルトは1|
+|per_page|string|false|ページごとに返すリソースの数|
 
 ##### Responseスキーマ
 Status Code: 200
 
 |Name|Type|Description|
 |-|-|-|
-
+|per_page|integer||
+|page|integer||
+|total|integer||
+|data|[object]||
+|name|string|言語名|
+|id|string|言語コード|
+|native_name|string|母国語での言語名|
+|links|object||
+|self|string||
 
 ```json
-
+{
+  "page": 1,
+  "per_page": 1,
+  "total": 1,
+  "data": [
+    {
+      "name": "English",
+      "native_name": "English",
+      "id": "en"
+    }
+  ],
+  "links": {
+    "self": "https://api.surveymonkey.com/v3/survey_languages?page=1&per_page=1"
+  }
+}
 ```
 
 #### GET /surveys/{id}/pages
@@ -1379,28 +1399,69 @@ Status Code: 200
 ##### 利用可能なメソッド
 - `HEAD`: リソースが利用可能かをチェックする
 - `OPTIONS`: 利用可能なメソッドとオプションを返す
-- `GET`: 認証されたユーザーが所有または共有しているアンケートのリストを返す。公開アプリのユーザーは、**View Surveys**スコープにアクセスする必要があります
-- `POST`: 新しい空のSurveyを作成するか、テンプレートID または既存のSurveyID が指定されている場合は、ページと質問があらかじめ入力されたSurveyを作成する。  
-公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
+- `GET`: ページの詳細を返す。公開アプリのユーザーは、**View Surveys**スコープにアクセスする必要があります
+- `POST`: 新しい空のページを作成し、/surveys/{id}/pages/{id}/questionsを見て質問とページを追加する。公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
 
 ##### GETのオプションクエリ
 |Name|Type|Required|Description|
 |-|-|-|-|
-
+|per_page|integer|false|ページごとに返すリソースの数|
+|page|integer|false|リソースのどのページを返すか。デフォルトは1|
 
 ##### Responseスキーマ
 Status Code: 200
 
 |Name|Type|Description|
 |-|-|-|
-
+|per_page|integer|ページあたりのリソース数|
+|total|integer||
+|data|[object]||
+|position|integer|Surveyにおけるページの位置|
+|id|string|ID of the page|
+|href|string|Link to the page|
+|title|string|Name of the page|
+|description|string|Description of the page|
+|links|object||
+|self|string||
+|page|integer||
 
 ```json
-
+{
+  "data": [
+    {
+      "title": "",
+      "description": "",
+      "position": 1,
+      "id": "172949600",
+      "href": "https://api.surveymonkey.com/v3/surveys/309695619/pages/172949600"
+    },
+    {
+      "title": "My Folder1",
+      "description": "",
+      "position": 2,
+      "id": "173176852",
+      "href": "https://api.surveymonkey.com/v3/surveys/309695619/pages/173176852"
+    }
+  ],
+  "per_page": 50,
+  "page": 1,
+  "total": 3,
+  "links": {
+    "self": "https://api.surveymonkey.com/v3/surveys/309695619/pages?page=1&per_page=50"
+  }
+}
 ```
 
 #### POST /surveys/{id}/pages
 `POST /surveys/{id}/pages`
+
+##### POST /surveys/{id}/pages のリクエストボディ
+
+|Name|Type|Required|Description|
+|-|-|-|-|
+|title|string|false|Page title|
+|description|string|false|Page description|
+|position|integer|false|Page position in survey|
 
 #### GET /surveys/{survey_id}/pages/{page_id}
 `GET /surveys/{survey_id}/pages/{page_id}`
@@ -1408,31 +1469,46 @@ Status Code: 200
 ##### 利用可能なメソッド
 - `HEAD`: リソースが利用可能かをチェックする
 - `OPTIONS`: 利用可能なメソッドとオプションを返す
-- `GET`: 認証されたユーザーが所有または共有しているアンケートのリストを返す。公開アプリのユーザーは、**View Surveys**スコープにアクセスする必要があります
-- `POST`: 新しい空のSurveyを作成するか、テンプレートID または既存のSurveyID が指定されている場合は、ページと質問があらかじめ入力されたSurveyを作成する。  
-公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
-
-##### GETのオプションクエリ
-|Name|Type|Required|Description|
-|-|-|-|-|
-
+- `GET`: ページの詳細を返す。公開アプリのユーザーは、**View Surveys**スコープにアクセスする必要があります
+- `PATCH`: ページを変更(/surveys/{id}/pages にPOSTする引数となるフィールドすべてをアップデート)する。公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
+- `PUT`: ページをリプレイスする(POST /surveys{id}/pages と同じ引数と要件)。公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
+- `DELETE`: ページを削除する。公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
 
 ##### Responseスキーマ
 Status Code: 200
 
 |Name|Type|Description|
 |-|-|-|
+|position|integer|Surveyにおけるページの位置|
+|id|string|ID of the page|
+|href|string|Link to the page|
+|title|string|Name of the page|
+|description|string|Description of the page|
+|question_count|integer|Number of questions on the page|
 
-
+##### GET, PATCH, PUT /surveys/{survey_id}/pages/{page_id} のレスポンス例
 ```json
-
+{
+  "title": "My Page1",
+  "description": "",
+  "position": 4,
+  "question_count": 0,
+  "id": "173177756",
+  "href": "https://api.surveymonkey.com/v3/surveys/309695619/pages/173177756"
+}
 ```
 
 #### PATCH /surveys/{survey_id}/pages/{page_id}
 `PATCH /surveys/{survey_id}/pages/{page_id}`
 
+##### 利用可能なメソッド
+- `PATCH`: ページを変更(/surveys/{id}/pages にPOSTする引数となるフィールドすべてをアップデート)する。公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
+
 #### PUT /surveys/{survey_id}/pages/{page_id}
 `PUT /surveys/{survey_id}/pages/{page_id}`
+
+##### 利用可能なメソッド
+- `PUT`: ページをリプレイスする(POST /surveys{id}/pages と同じ引数と要件)。公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
 
 #### GET /surveys/{survey_id}/pages/{page_id}/questions
 `GET /surveys/{survey_id}/pages/{page_id}/questions`
@@ -1440,28 +1516,180 @@ Status Code: 200
 ##### 利用可能なメソッド
 - `HEAD`: リソースが利用可能かをチェックする
 - `OPTIONS`: 利用可能なメソッドとオプションを返す
-- `GET`: 認証されたユーザーが所有または共有しているアンケートのリストを返す。公開アプリのユーザーは、**View Surveys**スコープにアクセスする必要があります
-- `POST`: 新しい空のSurveyを作成するか、テンプレートID または既存のSurveyID が指定されている場合は、ページと質問があらかじめ入力されたSurveyを作成する。  
-公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
+- `GET`: Surveyページの質問リストを返す。公開アプリのユーザーは、**View Surveys**スコープにアクセスする必要があります
+- `POST`: Surveyページに新しい質問を作成する。[質問のタイプ](#質問のタイプ)を参照。公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
 
 ##### GETのオプションクエリ
 |Name|Type|Required|Description|
 |-|-|-|-|
-
+|per_page|integer|false|ページごとに返すリソースの数|
+|page|integer|false|リソースのどのページを返すか。デフォルトは1|
 
 ##### Responseスキーマ
 Status Code: 200
 
 |Name|Type|Description|
 |-|-|-|
-
+|page|integer||
+|per_page|integer||
+|total|integer|Number of questions|
+|data|object||
+|position|integer|Position of the question in the page|
+|id|string|ID of the question|
+|href|string|Link to the question|
+|heading|string|Heading of the question|
+|links|object||
+|self|string||
 
 ```json
-
+{
+  "data": [
+    {
+      "heading": "Question 1",
+      "position": 1,
+      "id": "1",
+      "href": "https://api.surveymonkey.com/v3/surveys/1/pages/1/questions/1"
+    },
+    {
+      "heading": "Question 2",
+      "position": 2,
+      "id": "2",
+      "href": "https://api.surveymonkey.com/v3/surveys/1/pages/1/questions/2"
+    }
+  ],
+  "per_page": 50,
+  "page": 1,
+  "total": 2,
+  "links": {
+    "self": "https://api.surveymonkey.com/v3/surveys/1/pages/1/questions?page=1&per_page=50"
+  }
+}
 ```
 
 #### POST /surveys/{survey_id}/pages/{page_id}/questions
 `POST /surveys/{survey_id}/pages/{page_id}/questions`
+
+##### POST /surveys/{survey_id}/pages/{page_id}/questions のリクエストボディ
+
+|Name|Type|Required|Description|
+|-|-|-|-|
+|headings|[object]|true|質問見出しオブジェクトのリスト|
+|heading|string|true|質問のタイトル、またはrandom_assignmentが定義されている場合は空文字列|
+|description|string|false|random_assignmentが定義され、familyがpresentation_imageの場合、これがタイトルとなる|
+|image|object|false|質問ファミリーがpresentation_imageの場合の画像データ|
+|url|string|false|質問ファミリーがpresentation_imageの場合の画像のURL|
+|random_assignment|object|false|無作為割り付けデータ|
+|percent|integer|true|この無作為割付けが現れる確率の割合(合計が100でなければならない)|
+|position|integer|false|Survey作成ページの random_assignment の位置|
+|variable_name|string|false|質問追跡のための内部使用名|
+|position|integer|false|ページ上の質問の位置 (デフォルト=最後)|
+|family|string|true|質問ファミリーは質問のタイプを決定します。|
+|subtype|string|true|質問ファミリーのサブタイプはさらに質問のタイプを指定します。|
+|sorting|object|false|回答の詳細を並べ替える|
+|type|string|true|選択肢の並べ替え：デフォルト、textasc、textdesc、resp_count_asc、resp_count_desc、random、flip|
+|ignore_last|boolean|false|真の場合、最後の選択肢をソートしない (「上記のどれにも当てはまらない」などに有効)|
+|required|object|false|この質問に対する回答の要否|
+|text|string|true|必須質問に回答されなかった場合に表示するテキスト|
+|type|string|true|質問のどれだけを答えなければならないかを指定します: all、at_least、at_most、justly、または範囲。質問がmatrix_single、matrix_ranking、matrix menuの場合、必須です。|
+|amount|string|true|必要な回答数。必須タイプが範囲の場合、カンマで区切られた2つの数値が文字列として格納されます (例: "1,3" は 1 から 3 までの範囲を表します)。タイプが定義されている場合は必須。|
+|validation|object|false|回答が特定の検証パラメータをパスしなければならないかどうか|
+|type|string|true|使用するバリデーションの種類：any、integer、decimal、date_us、date_intl、email、text_length|
+|text|string|true|バリデーションに失敗した場合に表示するテキスト|
+|min|string|true|バリデーションをパスするための最小値。バリデーションタイプに応じて、文字列、整数、あるいは null を指定します。|
+|max|string|true|バリデーションをパスするための最大値。validation.typeに応じて、日付の文字列、整数、またはnullを指定します。|
+|sum|integer|false|family=open_endedとsubtype=numericalだけが受け入れられ、バリデーションをパスするためには、テキストボックスの合計が正確に整数でなければなりません。|
+|sum_text|string|false|family=open_endedかつsubtype=numericalの場合のみ、textboxの合計がvalidation.sumにならない場合に表示されるメッセージ。|
+|forced_ranking|boolean|false|タイプがマトリックスで、サブタイプがレーティングまたはシングルの場合、順位を強制するか否かを指定する。|
+|quiz_options|object|false|クイズモードが有効な場合、この質問のクイズプロパティを含むオブジェクト|
+|scoring_enabled|boolean|true|この問題がクイズに対応しているかどうか|
+|feedback|object|true|このクイズの問題に対するフィードバックの定義を含むオブジェクト|
+|feedback.correct_text|string|true|正解を示すテキスト|
+|feedback.incorrect_text|string|true|answerが正しくない場合に表示されるテキスト|
+|feedback.partial_text|string|true|答えが部分的に正しい場合に表示されるテキスト|
+|answers|object|true|回答オブジェクトについては、「質問タイプのフォーマット」を参照してください。open_ended_singleを除くすべての質問タイプで必須です|
+|display_options|object|false|表示オプションオブジェクトについては、「質問タイプの書式設定」を参照してください。ファイルアップロード、スライダー、画像選択、絵文字/スター評価の質問タイプでは必須|
+
+##### Responseスキーマ
+Status Code: 200
+
+|Name|Type|Description|
+|-|-|-|
+|headings|[object]|質問見出しオブジェクトのリスト|
+|heading|string|質問のタイトル、またはrandom_assignmentが定義されている場合は空文字列|
+|description|string|random_assignmentが定義され、familyがpresentation_imageの場合、これがタイトルとなる|
+|image|object|質問ファミリーがpresentation_imageの場合の画像データ|
+|url|string|質問ファミリーがpresentation_imageの場合の画像のURL|
+|random_assignment|object|無作為割り付けデータ|
+|percent|integer|この無作為割付けが現れる確率の割合(合計が100でなければならない)|
+|position|integer|Survey作成ページの random_assignment の位置|
+|variable_name|string|質問追跡のための内部使用名|
+|assignment_id|string|質問追跡用の内部使用ID|
+|position|integer|ページ上の質問の位置 (デフォルト=最後)|
+|visible|boolean|質問が表示されているかどうか(UIで削除されていることに対応する)|
+|family|string|質問ファミリーは質問のタイプを決定します。|
+|subtype|string|質問ファミリーのサブタイプはさらに質問のタイプを指定します|
+|sorting|object|回答の詳細を並べ替える|
+|type|string|選択肢の並べ替え：デフォルト、textasc、textdesc、resp_count_asc、resp_count_desc、random、flip|
+|ignore_last|boolean|真の場合、最後の選択肢をソートしない (「上記のどれにも当てはまらない」などに有効)|
+|required|object|この質問に対する回答の要否|
+|text|string|必須質問に回答されなかった場合に表示するテキスト|
+|type|string|質問のどれだけを答えなければならないかを指定します: all、at_least、at_most、justly、または範囲。質問がmatrix_single、matrix_ranking、matrix menuの場合、必須|
+|amount|string|必要な回答数。必須タイプがrangeの場合、カンマで区切られた2つの数値が文字列として格納されます (例えば、"1,3" は1から3の範囲を表します)。タイプが定義されている場合は必須|
+|validation|object|回答が特定の検証パラメータをパスしなければならないかどうか|
+|type|string|使用するバリデーションの種類：any、integer、decimal、date_us、date_intl、email、text_length|
+|text|string|バリデーションに失敗した場合に表示するテキスト|
+|min|string|バリデーションをパスするための最小値。バリデーションタイプに応じて、文字列、整数、あるいは null を指定|
+|max|string|バリデーションをパスするための最大値。validation.typeに応じて、日付の文字列、整数、またはnullを指定|
+|sum|integer|family=open_endedとsubtype=numericalだけが受け入れられ、バリデーションをパスするためには、テキストボックスの合計が正確に整数でなければなりません。|
+|sum_text|string|family=open_endedかつsubtype=numericalの場合のみ、textboxの合計がvalidation.sumにならない場合に表示されるメッセージ|
+|forced_ranking|boolean|タイプがマトリックスで、サブタイプがレーティングまたはシングルの場合、順位を強制するか否かを指定|
+|answers|object|回答オブジェクトについては、「質問タイプのフォーマット」を参照してください。open_ended_singleを除くすべての質問タイプで必須|
+|id|string|Question id|
+
+##### 200 Response
+```json
+{
+  "headings": [
+    {
+      "heading": "string",
+      "description": "string",
+      "image": {
+        "url": "string"
+      },
+      "random_assignment": {
+        "percent": 0,
+        "position": 0,
+        "variable_name": "string",
+        "assignment_id": "string"
+      }
+    }
+  ],
+  "position": 0,
+  "visible": true,
+  "family": "string",
+  "subtype": "string",
+  "sorting": {
+    "type": "string",
+    "ignore_last": true
+  },
+  "required": {
+    "text": "string",
+    "type": "string",
+    "amount": "string"
+  },
+  "validation": {
+    "type": "string",
+    "text": "string",
+    "min": "string",
+    "max": "string",
+    "sum": 0,
+    "sum_text": "string"
+  },
+  "forced_ranking": true,
+  "answers": {},
+  "id": "string"
+}
+```
 
 #### GET /surveys/{survey_id}/pages/{page_id}/questions/{quesiton_id}
 `GET /surveys/{survey_id}/pages/{page_id}/questions/{quesiton_id}`
@@ -1469,29 +1697,126 @@ Status Code: 200
 ##### 利用可能なメソッド
 - `HEAD`: リソースが利用可能かをチェックする
 - `OPTIONS`: 利用可能なメソッドとオプションを返す
-- `GET`: 認証されたユーザーが所有または共有しているアンケートのリストを返す。公開アプリのユーザーは、**View Surveys**スコープにアクセスする必要があります
-- `POST`: 新しい空のSurveyを作成するか、テンプレートID または既存のSurveyID が指定されている場合は、ページと質問があらかじめ入力されたSurveyを作成する。  
-公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
+- `GET`: 質問を返す。公開アプリのユーザーは、**View Surveys**スコープにアクセスする必要があります
+- `PATCH`: 新しい空のSurveyを作成するか、テンプレートID または既存のSurveyID が指定されている場合は、ページと質問があらかじめ入力されたSurveyを作成する。公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
+- `PATCH`: 質問を変更(/surveys/{id}/pages/questions にPOSTする引数となるフィールドすべてをアップデート)する。公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
+- `PUT`: 質問をリプレイスする(POST /surveys{id}/pages/questions と同じ引数と要件)。公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
+- `DELETE`: 質問を削除する。公開アプリのユーザーは、**Create/Modify Surveys**スコープにアクセスする必要があります
+
+##### 200 Response
+```json
+{
+  "headings": {
+    "heading": "string"
+  },
+  "position": 0,
+  "family": "string",
+  "subtype": "string",
+  "answers": {
+    "choices": [
+      {
+        "text": "string"
+      }
+    ],
+    "others": [
+      {
+        "text": "string",
+        "num_chars": 0,
+        "num_lines": 0
+      }
+    ]
+  }
+}
+```
+
+#### 質問のタイプ
+すべての質問には`family`と`subtype`があり、いくつかの質問には`display_type`と`display_subtype`があります。  
+さまざまな質問タイプに対する`answers`オブジェクトと`display_options`オブジェクトのフォーマット例については、以下を参照してください。  
+SurveyMonkeyの質問タイプの詳細については、ヘルプセンターを参照してください。
+
+##### answerオブジェクトとdisplay_optionsオブジェクトのフォーマット例
+
+|Family|Subtype|Display_Type|Display_Subtype|
+|-|-|-|-|
+|single_choice|'vertical', 'horiz', 'menu'|'image_choice'|NA|
+|matrix|'single', 'rating', 'ranking', 'menu', 'multi'|'emoji' (with 'ranking')|'star'|
+|open_ended|'single', 'multi', 'numerical', 'essay'|'slider', 'file_upload' (with 'single')|NA|
+|demographic|'international', 'us'|NA|NA|
+|datetime|'both', 'date_only', 'time_only'|NA|NA|
+|multiple_choice|'vertical'|'image_choice'|NA|
+|presentation|'descriptive_text', 'image'|NA|NA|
+
+##### ラジオボタン
+![radio-button](./images/single-choice.png)
+
+|Name|Description|Data Type|
+|-|-|-|
+|choices (required)|ユーザーが利用可能な選択肢のリスト|Array|
+|choices[_].text (required)|ユーザーの選択|String|
+|choices[_].position (optional)|現在の選択位置|Integer|
+|other (optional)|その他の回答の選択肢|Object|
+|other[_].text|他のオプションの隣に表示するテキスト|String|
+|other[_].num_chars|オプションに文字数制限を設定する|Integer|
+|other[_].num_lines|オプションに行数制限を設定する|Integer|
+
+### 質問バンク
+
+### Surveyフォルダ
+フォルダはSurveyを整理するために使います。  
+以下のエンドポイントにより、フォルダを取得/作成することができます。  
+POST, PUT, PATCH /surveys に`folder_id`を含むことでSurveyを特定のフォルダに追加することができます。  
+GET /surveys に`folder_id`クエリパラメータを追加して、フォルダによってSurveyをフィルタリングすることもできます。
+
+#### GET /survey_folders
+`GET /survey_folders`
+
+##### 利用可能なメソッド
+- `HEAD`: リソースが利用可能かをチェックする
+- `OPTIONS`: 利用可能なメソッドとオプションを返す
+- `POST`: 作成
+- `GET`: 利用可能なフォルダを返す
 
 ##### GETのオプションクエリ
+
 |Name|Type|Required|Description|
 |-|-|-|-|
-
+|per_page|integer|false|ページごとに返すリソースの数|
+|page|integer|false|リソースのどのページを返すか。デフォルトは1|
 
 ##### Responseスキーマ
 Status Code: 200
 
 |Name|Type|Description|
 |-|-|-|
+|per_page|integer|ページあたりのリソース数|
+|total|integer||
+|data|[object]||
+|num_surveys|integer|フォルダ内のSurvey数|
+|id|string|ID of the folder|
+|href|string|Link to the folder|
+|title|string|Name of the folder|
+|links|object||
+|self|string||
+|page|integer||
 
+#### POST /survey_folders
+`POST /survey_folders`
 
-```json
+##### POST /survey_folders のリクエストボディ
 
-```
+|Name|Type|Required|Description|
+|-|-|-|-|
+|title|string|false|フォルダのタイトル|
 
-### 質問バンク
+##### Responseスキーマ
+Status Code: 200
 
-### Surveyフォルダ
+|Name|Type|Description|
+|-|-|-|
+|title|string|フォルダのタイトル|
+|href|string|Link to the folder|
+|id|string|ID of the folder|
+|num_surveys|integer|フォルダ内のSurvey数|
 
 ### 翻訳と多言語対応
 
@@ -1508,3 +1833,36 @@ Status Code: 200
 ### 組織
 
 ### エラー
+エラーのリストを取得したり、idでエラーを検索したりする
+
+#### GET /errors
+`GET /errors`
+
+##### 利用可能なメソッド
+- `HEAD`: リソースが利用可能かをチェックする
+- `OPTIONS`: 利用可能なメソッドとオプションを返す
+- `GET`: 既知のエラーのリストを返す
+
+##### GETのオプションクエリ
+
+|Name|Type|Required|Description|
+|-|-|-|-|
+|page|string|false|リソースのどのページを返すか。デフォルトは1|
+|per_page|string|false|ページごとに返すリソースの数。デフォルトは50|
+
+##### Responseスキーマ
+Status Code: 200
+
+|Name|Type|Description|
+|-|-|-|
+|data|[object]|エラータイプのリスト|
+|id|string|Error id|
+|message|string|Error explanation|
+|href|string|Error API URL|
+|name|string|Error name|
+|docs|string|Error documentation page|
+|per_page|integer|ページごとに返されるリソースの数|
+|page|integer|返されたリソースのページ|
+|total|integer|返されたエラーの数|
+|links|object|このエンドポイントのリンクを含む|
+|self|string|このエンドポイントに関連するリンク|

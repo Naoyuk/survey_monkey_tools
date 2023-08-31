@@ -1,22 +1,18 @@
 {
-    "data": [
-        {
-            "id": "xxxxxxxxx",
-            "title": "test2-2022-2023",
-            "nickname": "",
-            "href": "https://api.surveymonkey.com/v3/surveys/xxxxxxxxx"
-        },
-        {
-            "id": "yyyyyyyyy",
-            "title": "test1-2022-2023",
-            "nickname": "",
-            "href": "https://api.surveymonkey.com/v3/surveys/yyyyyyyyy"
-        }
-    ],
-    "per_page": 50,
-    "page": 1,
-    "total": 2,
-    "links": {
-        "self": "https://api.surveymonkey.com/v3/surveys?per_page=50&page=1"
+  "data": [
+    {
+      "id": "1234",
+      "title": "My Survey",
+      "nickname": "",
+      "href": "https://api.surveymonkey.com/v3/surveys/1234"
     }
+  ],
+  "per_page": 50,
+  "page": 1,
+  "total": 1,
+  "links": {
+    "self": "https://api.surveymonkey.com/v3/surveys?page=1&per_page=50",
+    "next": "https://api.surveymonkey.com/v3/surveys?page=2&per_page=50",
+    "last": "https://api.surveymonkey.com/v3/surveys?page=5&per_page=50"
+  }
 }
