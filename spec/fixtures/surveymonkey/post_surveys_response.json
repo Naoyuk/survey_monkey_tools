@@ -1,0 +1,44 @@
+{
+  "title": "New Survey",
+  "from_template_id": "",
+  "from_survey_id": "",
+  "from_team_template_id": "",
+  "nickname": "My Survey",
+  "language": "en",
+  "buttons_text": {
+    "next_button": "string",
+    "prev_button": "string",
+    "exit_button": "string",
+    "done_button": "string"
+  },
+  "custom_variables": {},
+  "footer": true,
+  "folder_id": "",
+  "theme_id": 1506280,
+  "quiz_options": {
+    "is_quiz_mode": true,
+    "default_question_feedback": {
+      "correct_text": "string",
+      "incorrect_text": "string",
+      "partial_text": "string"
+    },
+    "show_results_type": "string",
+    "feedback": {
+      "ranges_type": "string",
+      "ranges": [
+        {
+          "min": 0,
+          "max": 0,
+          "message": "string"
+        }
+      ]
+    }
+  },
+  "pages": [
+    {
+      "questions": [
+        "See formatting question types for more details"
+      ]
+    }
+  ]
+}
