@@ -33,20 +33,13 @@ module SurveyMonkeyTools
     end
 
     desc "create_folder", "creates a folder"
+
     def create_folder(title)
-      body = { title: title }
-      begin
-        response = request(END_POINTS[:folders], body)
-        if response.code == "201"
-          puts "Folder is successfully created"
-        else
-          puts "Error has occured"
-        end
-        puts "Status: #{response.code}"
-        puts response.body
-      rescue StandardError => e
-        puts e
-      end
+      response = request(END_POINTS[:folders], title: title)
+      message = response.code == "201" ? "Folder is successfully created" : "Error has occured"
+      puts "#{message}\nStatus: #{response.code}\n#{response.body}"
+    rescue StandardError => e
+      puts e
     end
 
     no_commands do
