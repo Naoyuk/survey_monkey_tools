@@ -19,10 +19,15 @@ To GET all survey folders list
 
     $ bundle exec ruby exe/survey_monkey_tools folders
 
+To POST folder
+
+    $ bundle exec ruby exe/survey_monkey_tools create_folder {folder_name}
+
 ## Features
 
 - GET /surveys
 - GET /survey_folders
+- POST /survey_folders
 
 ## Development
 
