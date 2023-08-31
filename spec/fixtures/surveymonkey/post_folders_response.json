@@ -1,0 +1,22 @@
+{
+  "data": [
+    {
+      "title": "SomeApp Polls",
+      "id": "1845492",
+      "num_surveys": 19,
+      "href": "https://api.surveymonkey.com/v3/survey_folders/1845492"
+    },
+    {
+      "title": "Teams Polls",
+      "id": "1846967",
+      "num_surveys": 29,
+      "href": "https://api.surveymonkey.com/v3/survey_folders/1846967"
+    }
+  ],
+  "per_page": 50,
+  "page": 1,
+  "total": 2,
+  "links": {
+    "self": "https://api.surveymonkey.com/v3/survey_folders?page=1&per_page=50"
+  }
+}
