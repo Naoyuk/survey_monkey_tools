@@ -43,7 +43,7 @@ module SurveyMonkeyTools
 
     desc "create_folder", "creates a folder"
     def create_folder(title)
-      response = request(END_POINTS[:folders], params: { title: title } )
+      response = request(END_POINTS[:folders], params: { title: title })
       message = response.code == "201" ? "Folder is successfully created" : "Error has occured"
       puts "#{message}\nStatus: #{response.code}\n#{response.body}"
     rescue StandardError => e
