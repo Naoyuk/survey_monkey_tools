@@ -11,11 +11,18 @@ Set GitHub Secrets named ACCESS_TOKEN.
 
 ## Usage
 
-    $ bundle exec ruby exe/survey_monkey_tools get
+To GET all surveys list
+
+    $ bundle exec ruby exe/survey_monkey_tools surveys
+
+To GET all survey folders list
+
+    $ bundle exec ruby exe/survey_monkey_tools folders
 
 ## Features
 
 - GET /surveys
+- GET /survey_folders
 
 ## Development
 
