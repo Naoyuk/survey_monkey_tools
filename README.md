@@ -15,6 +15,10 @@ To GET all surveys list
 
     $ bundle exec ruby exe/survey_monkey_tools surveys
 
+To POST survey (Disable from command line. This can be used by calling from other command)
+
+    $ bundle exec ruby exe/survey_monkey_tools create_survey {'key1':'value1', 'key2':'value2'}
+
 To GET all survey folders list
 
     $ bundle exec ruby exe/survey_monkey_tools folders
@@ -26,6 +30,7 @@ To POST folder
 ## Features
 
 - GET /surveys
+- POST /surveys
 - GET /survey_folders
 - POST /survey_folders
 
