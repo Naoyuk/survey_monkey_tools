@@ -50,7 +50,10 @@ RSpec.describe SurveyMonkeyTools do
     end
 
     it "returns a success response" do
+      survey_monkey_tools = SurveyMonkeyTools::CLI.new
 
+      stdout = "Folder is successfully created\nStatus: 201\n#{@body}"
+      expect { survey_monkey_tools.create_folder("Teams Polls") }.to output(stdout).to_stdout
     end
   end
 
@@ -59,9 +62,7 @@ RSpec.describe SurveyMonkeyTools do
       "Accept" => "application/json",
       "Authorization" => "Bearer #{ENV["ACCESS_TOKEN"]}"
     }
-    if method == :post
-      headers["Content-Type"] = "application/json"
-    end
+    headers["Content-Type"] = "application/json" if method == :post
 
     stub_request(method, "#{SurveyMonkeyTools::BASE_URI}/v3#{endpoint}").with(
       headers: headers
@@ -70,6 +71,7 @@ RSpec.describe SurveyMonkeyTools do
 
   def build_stub(filepath, method, endpoint)
     @body = File.read(File.join(__dir__, filepath))
-    surveymonkey_request(method, endpoint).to_return(body: @body, status: 200)
+    status = method == :post ? 201 : 200
+    surveymonkey_request(method, endpoint).to_return(body: @body, status: status)
   end
 end
