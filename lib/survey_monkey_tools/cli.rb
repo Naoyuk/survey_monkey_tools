@@ -22,6 +22,15 @@ module SurveyMonkeyTools
       puts response(END_POINTS[:surveys]).body
     end
 
+    desc "create_survey", "creates a survey"
+    def create_survey(params)
+      response = request(END_POINTS[:surveys], params: params)
+      message = response.code == "201" ? "Survey is successfully created" : "Error has occured"
+      puts "#{message}\nStatus: #{response.code}\n#{response.body}"
+    rescue StandardError => e
+      puts e
+    end
+
     desc "folders", "gets folders"
     def folders
       puts response(END_POINTS[:folders]).body
@@ -34,7 +43,7 @@ module SurveyMonkeyTools
 
     desc "create_folder", "creates a folder"
     def create_folder(title)
-      response = request(END_POINTS[:folders], title: title)
+      response = request(END_POINTS[:folders], params: { title: title })
       message = response.code == "201" ? "Folder is successfully created" : "Error has occured"
       puts "#{message}\nStatus: #{response.code}\n#{response.body}"
     rescue StandardError => e
@@ -69,7 +78,7 @@ module SurveyMonkeyTools
       headers = { Accept: "application/json", Authorization: "Bearer #{access_token}" }
       req = Net::HTTP::Post.new("/v3#{endpoint}", headers)
       req.content_type = "application/json"
-      req.body = body.to_json
+      req.body = body[:params].to_json
 
       begin
         http.request(req)
