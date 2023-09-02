@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.5.0] - 2023-08-31
+
+- Added SurveyMonkeyTools::CLI#create_survey
+
 ## [0.4.0] - 2023-08-30
 
 - Added SurveyMonkeyTools::CLI#create_folder
