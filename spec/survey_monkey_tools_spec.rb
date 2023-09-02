@@ -28,7 +28,7 @@ RSpec.describe SurveyMonkeyTools do
     end
   end
 
-  describe "POST #surveys" do
+  describe "POST #post_survey" do
     before do
       filepath = "fixtures/surveymonkey/post_surveys_response.json"
       endpoint = SurveyMonkeyTools::END_POINTS[:surveys]
@@ -41,7 +41,25 @@ RSpec.describe SurveyMonkeyTools do
       params = JSON.parse(File.read(File.join(__dir__, filepath)))
       stdout = "Survey is successfully created\nStatus: 201\n#{@body}"
 
-      expect { survey_monkey_tools.create_survey(params) }.to output(stdout).to_stdout
+      expect { survey_monkey_tools.post_survey(params) }.to output(stdout).to_stdout
+    end
+  end
+
+  describe "PATCH #patch_survey" do
+    before do
+      filepath = "fixtures/surveymonkey/patch_survey_response.json"
+      @id = 1
+      endpoint = "#{SurveyMonkeyTools::END_POINTS[:surveys]}/#{@id}"
+      build_stub(filepath, :patch, endpoint)
+    end
+
+    it "returns a correct stdout" do
+      survey_monkey_tools = SurveyMonkeyTools::CLI.new
+      filepath = "fixtures/surveymonkey/post_survey_request.json"
+      params = JSON.parse(File.read(File.join(__dir__, filepath)))
+      stdout = "Survey is successfully updated\nStatus: 200\n#{@body}"
+
+      expect { survey_monkey_tools.patch_survey(@id, params) }.to output(stdout).to_stdout
     end
   end
 
@@ -59,7 +77,7 @@ RSpec.describe SurveyMonkeyTools do
     end
   end
 
-  describe "POST #create_folder" do
+  describe "POST #post_folder" do
     before do
       filepath = "fixtures/surveymonkey/post_folders_response.json"
       endpoint = SurveyMonkeyTools::END_POINTS[:folders]
@@ -70,7 +88,7 @@ RSpec.describe SurveyMonkeyTools do
       survey_monkey_tools = SurveyMonkeyTools::CLI.new
       stdout = "Folder is successfully created\nStatus: 201\n#{@body}"
 
-      expect { survey_monkey_tools.create_folder("Teams Polls") }.to output(stdout).to_stdout
+      expect { survey_monkey_tools.post_folder("Teams Polls") }.to output(stdout).to_stdout
     end
   end
 
