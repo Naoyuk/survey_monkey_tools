@@ -22,10 +22,19 @@ module SurveyMonkeyTools
       puts response(END_POINTS[:surveys]).body
     end
 
-    desc "create_survey", "creates a survey"
-    def create_survey(params)
-      response = request(END_POINTS[:surveys], params: params)
+    desc "post_survey", "creates a survey"
+    def post_survey(params)
+      response = post(END_POINTS[:surveys], params: params)
       message = response.code == "201" ? "Survey is successfully created" : "Error has occured"
+      puts "#{message}\nStatus: #{response.code}\n#{response.body}"
+    rescue StandardError => e
+      puts e
+    end
+
+    desc "patch_survey", "updates a survey"
+    def patch_survey(id, params)
+      response = patch("#{END_POINTS[:surveys]}/#{id}", params: params)
+      message = response.code == "200" ? "Survey is successfully updated" : "Error has occured"
       puts "#{message}\nStatus: #{response.code}\n#{response.body}"
     rescue StandardError => e
       puts e
@@ -41,9 +50,9 @@ module SurveyMonkeyTools
       puts "done copy"
     end
 
-    desc "create_folder", "creates a folder"
-    def create_folder(title)
-      response = request(END_POINTS[:folders], params: { title: title })
+    desc "post_folder", "creates a folder"
+    def post_folder(title)
+      response = post(END_POINTS[:folders], params: { title: title })
       message = response.code == "201" ? "Folder is successfully created" : "Error has occured"
       puts "#{message}\nStatus: #{response.code}\n#{response.body}"
     rescue StandardError => e
@@ -74,9 +83,22 @@ module SurveyMonkeyTools
       end
     end
 
-    def request(endpoint, body)
+    def post(endpoint, body)
       headers = { Accept: "application/json", Authorization: "Bearer #{access_token}" }
       req = Net::HTTP::Post.new("/v3#{endpoint}", headers)
+      req.content_type = "application/json"
+      req.body = body[:params].to_json
+
+      begin
+        http.request(req)
+      rescue StandardError => e
+        puts e
+      end
+    end
+
+    def patch(endpoint, body)
+      headers = { Accept: "application/json", Authorization: "Bearer #{access_token}" }
+      req = Net::HTTP::Patch.new("/v3#{endpoint}", headers)
       req.content_type = "application/json"
       req.body = body[:params].to_json
 

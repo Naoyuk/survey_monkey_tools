@@ -1,0 +1,14 @@
+{
+  "title": "New Survey",
+  "nickname": "My Survey",
+  "language": "en",
+  "buttons_text": {
+    "next_button": "string",
+    "prev_button": "string",
+    "exit_button": "string",
+    "done_button": "string"
+  },
+  "custom_variables": {},
+  "footer": true,
+  "folder_id": ""
+}
