@@ -1,5 +1,10 @@
 ## [Unreleased]
 
+## [0.6.0] - 2023-09-02
+
+- Added SurveyMonkeyTools::CLI#patch_survey
+- Changed SurveyMonkeyTools::CLI#post_survey to SurveyMonkeyTools::CLI#surveys
+
 ## [0.5.0] - 2023-08-31
 
 - Added SurveyMonkeyTools::CLI#create_survey

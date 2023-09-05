@@ -18,7 +18,7 @@ RSpec.describe SurveyMonkeyTools do
     before do
       filepath = "fixtures/surveymonkey/get_surveys_response.json"
       endpoint = SurveyMonkeyTools::END_POINTS[:surveys]
-      build_stub(filepath, :get, endpoint)
+      build_stub(filepath, :get, endpoint, 200)
     end
 
     it "returns a correct stdout" do
@@ -32,7 +32,7 @@ RSpec.describe SurveyMonkeyTools do
     before do
       filepath = "fixtures/surveymonkey/post_surveys_response.json"
       endpoint = SurveyMonkeyTools::END_POINTS[:surveys]
-      build_stub(filepath, :post, endpoint)
+      build_stub(filepath, :post, endpoint, 201)
     end
 
     it "returns a correct stdout" do
@@ -50,7 +50,7 @@ RSpec.describe SurveyMonkeyTools do
       filepath = "fixtures/surveymonkey/patch_survey_response.json"
       @id = 1
       endpoint = "#{SurveyMonkeyTools::END_POINTS[:surveys]}/#{@id}"
-      build_stub(filepath, :patch, endpoint)
+      build_stub(filepath, :patch, endpoint, 200)
     end
 
     it "returns a correct stdout" do
@@ -67,7 +67,7 @@ RSpec.describe SurveyMonkeyTools do
     before do
       filepath = "fixtures/surveymonkey/get_folders_response.json"
       endpoint = SurveyMonkeyTools::END_POINTS[:folders]
-      build_stub(filepath, :get, endpoint)
+      build_stub(filepath, :get, endpoint, 200)
     end
 
     it "returns a correct stdout" do
@@ -81,7 +81,7 @@ RSpec.describe SurveyMonkeyTools do
     before do
       filepath = "fixtures/surveymonkey/post_folders_response.json"
       endpoint = SurveyMonkeyTools::END_POINTS[:folders]
-      build_stub(filepath, :post, endpoint)
+      build_stub(filepath, :post, endpoint, 201)
     end
 
     it "returns a success response" do
@@ -97,16 +97,25 @@ RSpec.describe SurveyMonkeyTools do
       "Accept" => "application/json",
       "Authorization" => "Bearer #{ENV["ACCESS_TOKEN"]}"
     }
-    headers["Content-Type"] = "application/json" if method == :post
+    headers["Content-Type"] = "application/json" if method == :post || method == :patch
 
     stub_request(method, "#{SurveyMonkeyTools::BASE_URI}/v3#{endpoint}").with(
       headers: headers
     )
   end
 
-  def build_stub(filepath, method, endpoint)
+  def build_stub(filepath, method, endpoint, response_status)
     @body = File.read(File.join(__dir__, filepath))
-    status = method == :post ? 201 : 200
-    surveymonkey_request(method, endpoint).to_return(body: @body, status: status)
+    headers = {
+      "Accept": "application/json",
+      "Authorization": "Bearer #{ENV['ACCESS_TOKEN']}"
+    }
+    headers["Content-Type"] = "application/json" if method == :post || method == :patch
+
+    surveymonkey_request(method, endpoint).to_return(
+      body: @body,
+      status: response_status,
+      headers: headers
+    )
   end
 end

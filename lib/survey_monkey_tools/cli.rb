@@ -7,6 +7,7 @@ require "uri"
 require "net/http"
 require "dotenv"
 require "debug"
+
 Dotenv.load
 
 module SurveyMonkeyTools
@@ -19,30 +20,33 @@ module SurveyMonkeyTools
 
     desc "surveys", "gets surveys"
     def surveys
-      puts response(END_POINTS[:surveys]).body
+      puts response(END_POINTS[:surveys], :get).body
     end
 
     desc "post_survey", "creates a survey"
+    option :params, type: :hash
     def post_survey(params)
-      response = post(END_POINTS[:surveys], params: params)
-      message = response.code == "201" ? "Survey is successfully created" : "Error has occured"
-      puts "#{message}\nStatus: #{response.code}\n#{response.body}"
+      res = response(END_POINTS[:surveys], :post, params: params)
+      message = res.code == "201" ? "Survey is successfully created" : "Error has occured"
+      puts "#{message}\nStatus: #{res.code}\n#{res.body}"
     rescue StandardError => e
       puts e
     end
 
     desc "patch_survey", "updates a survey"
+    option :id
+    option :params, type: :hash
     def patch_survey(id, params)
-      response = patch("#{END_POINTS[:surveys]}/#{id}", params: params)
-      message = response.code == "200" ? "Survey is successfully updated" : "Error has occured"
-      puts "#{message}\nStatus: #{response.code}\n#{response.body}"
+      res = response("#{END_POINTS[:surveys]}/#{id}", :patch, params: params)
+      message = res.code == "200" ? "Survey is successfully updated" : "Error has occured"
+      puts "#{message}\nStatus: #{res.code}\n#{res.body}"
     rescue StandardError => e
       puts e
     end
 
     desc "folders", "gets folders"
     def folders
-      puts response(END_POINTS[:folders]).body
+      puts response(END_POINTS[:folders], :get).body
     end
 
     desc "copy", "copys new surveys from surveys of last year"
@@ -51,10 +55,11 @@ module SurveyMonkeyTools
     end
 
     desc "post_folder", "creates a folder"
-    def post_folder(title)
-      response = post(END_POINTS[:folders], params: { title: title })
-      message = response.code == "201" ? "Folder is successfully created" : "Error has occured"
-      puts "#{message}\nStatus: #{response.code}\n#{response.body}"
+    option :params, type: :hash
+    def post_folder(params)
+      res = response(END_POINTS[:folders], :post, params: params)
+      message = res.code == "201" ? "Folder is successfully created" : "Error has occured"
+      puts "#{message}\nStatus: #{res.code}\n#{res.body}"
     rescue StandardError => e
       puts e
     end
@@ -72,36 +77,28 @@ module SurveyMonkeyTools
       http
     end
 
-    def response(endpoint)
+    def response(endpoint, method, params=nil)
       headers = { Accept: "application/json", Authorization: "Bearer #{access_token}" }
-      req = Net::HTTP::Get.new("/v3#{endpoint}", headers)
 
-      begin
-        http.request(req)
-      rescue StandardError => e
-        puts e
-      end
+      case method
+        when :get
+          req = Net::HTTP::Get.new("/v3#{endpoint}", headers)
+        when :post, :patch
+          req = Net::HTTP.const_get(method.capitalize).new("/v3#{endpoint}", headers)
+          req.content_type = "application/json"
+          req.body = JSON.parse(params[:params]).to_json
+          # req.body = params[:params].to_json
+        # Uncomment and add other HTTP methods as needed
+        # when :put
+        # when :delete
+        else
+          raise ArgumentError, "Unsupported HTTP method: #{method}"
+        end
+
+      send_request(req)
     end
 
-    def post(endpoint, body)
-      headers = { Accept: "application/json", Authorization: "Bearer #{access_token}" }
-      req = Net::HTTP::Post.new("/v3#{endpoint}", headers)
-      req.content_type = "application/json"
-      req.body = body[:params].to_json
-
-      begin
-        http.request(req)
-      rescue StandardError => e
-        puts e
-      end
-    end
-
-    def patch(endpoint, body)
-      headers = { Accept: "application/json", Authorization: "Bearer #{access_token}" }
-      req = Net::HTTP::Patch.new("/v3#{endpoint}", headers)
-      req.content_type = "application/json"
-      req.body = body[:params].to_json
-
+    def send_request(req)
       begin
         http.request(req)
       rescue StandardError => e
