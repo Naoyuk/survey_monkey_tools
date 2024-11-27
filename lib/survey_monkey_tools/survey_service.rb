@@ -9,40 +9,37 @@ module SurveyMonkeyTools
     end
 
     def response(endpoint)
-      headers = { Accept: "application/json", Authorization: "Bearer #{@access_token}" }
       req = Net::HTTP::Get.new("/v3#{endpoint}", headers)
-
-      begin
-        @http.request(req)
-      rescue StandardError => e
-        puts e
-      end
+      send_request(req)
     end
 
     def post(endpoint, body)
-      headers = { Accept: "application/json", Authorization: "Bearer #{@access_token}" }
       req = Net::HTTP::Post.new("/v3#{endpoint}", headers)
       req.content_type = "application/json"
       req.body = body[:params].to_json
-
-      begin
-        @http.request(req)
-      rescue StandardError => e
-        puts e
-      end
+      send_request(req)
     end
 
     def patch(endpoint, body)
-      headers = { Accept: "application/json", Authorization: "Bearer #{@access_token}" }
       req = Net::HTTP::Patch.new("/v3#{endpoint}", headers)
       req.content_type = "application/json"
       req.body = body[:params].to_json
+      send_request(req)
+    end
 
-      begin
-        @http.request(req)
-      rescue StandardError => e
-        puts e
-      end
+    private
+
+    def headers
+      {
+        Accept: "application/json",
+        Authorization: "Bearer #{@access_token}"
+      }
+    end
+
+    def send_request(req)
+      @http.request(req)
+    rescue StandardError => e
+      puts e
     end
   end
 end
