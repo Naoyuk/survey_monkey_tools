@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module SurveyMonkeyTools
+  # class for Survey API
   class SurveyService
     def initialize(http, access_token)
       @http = http
