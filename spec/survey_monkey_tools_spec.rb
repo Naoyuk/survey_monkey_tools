@@ -24,7 +24,9 @@ RSpec.describe SurveyMonkeyTools do
     it "returns a correct stdout" do
       survey_monkey_tools = SurveyMonkeyTools::CLI.new
 
-      expect { survey_monkey_tools.surveys }.to output(@body).to_stdout
+      expected_stdout = "Surveys:\n  - 1. 1234: My Survey\n"
+
+      expect { survey_monkey_tools.surveys }.to output(expected_stdout).to_stdout
     end
   end
 

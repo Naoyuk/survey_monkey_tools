@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "survey_monkey_tools"
-require "json"
 require "thor"
 require "uri"
 require "dotenv"
@@ -18,7 +17,9 @@ module SurveyMonkeyTools
 
     desc "surveys", "gets surveys"
     def surveys
-      puts survey_service.response(END_POINTS[:surveys]).body
+      results = survey_service.puts_surveys(END_POINTS[:surveys])
+      puts "Surveys:"
+      results.each_with_index { |result, i| puts "  - #{i + 1}. #{result[:id]}: #{result[:title]}" }
     end
 
     desc "post_survey", "creates a survey"
@@ -41,7 +42,21 @@ module SurveyMonkeyTools
 
     desc "folders", "gets folders"
     def folders
-      puts survey_service.response(END_POINTS[:folders]).body
+      results = survey_service.response(END_POINTS[:folders])
+      puts "Folders:"
+      results.each_with_index do |result, i|
+        puts "  - #{i + 1}. #{result[:id]}: #{result[:title]} (#{result[:num_surveys]} surveys)"
+      end
+    end
+
+    desc "responses", "gets responses"
+    def responses
+      surveys = survey_service.surveys(END_POINTS[:surveys])
+      collectors = survey_service.collectors(surveys)
+      response_service.responses(collectors)
+      puts "All responses are downloaded as csv files"
+    rescue StandardError => e
+      puts e
     end
 
     desc "copy", "copys new surveys from surveys of last year"
@@ -73,6 +88,10 @@ module SurveyMonkeyTools
 
     def survey_service
       SurveyService.new(http, access_token)
+    end
+
+    def response_service
+      ResponseService.new(http, access_token)
     end
   end
 end
